@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Index</title>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script>
+       
+    </script>
 </head>
 <body>
-	<h1>Hello World</h1>
+    <h1>Index</h1>
+    
+    <form action="/crawl" method="get">
+        <input type="text" name="url" placeholder="크롤링할 URL 입력" required>
+        <button type="submit">크롤링</button>
+    </form>
+    
+    <span th:text="${doc}"></span>
 </body>
-</html> 
+</html>

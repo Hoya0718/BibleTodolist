@@ -23,12 +23,5 @@ public class BibleSecurityConfig {
 		return http.build();
 	}
 	
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-		
-		log.info("--------------------web configure--------------------");
-		
-		return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-	}
 	
 }

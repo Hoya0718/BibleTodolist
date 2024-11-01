@@ -10,4 +10,6 @@ public class BibleTodoApplication {
 		SpringApplication.run(BibleTodoApplication.class, args);
 	}
 
+	
+	
 }
