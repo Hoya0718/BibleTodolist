@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>성경 리스트</title>
     <script>
-       
+        // API 요청을 처리하는 함수
+        function fetchBible() {
+            const bibleId = document.getElementById('bible-id-input').value; // 입력값 가져오기
+            fetch(`/api/${bibleId}`)  // API 요청
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text(); // 텍스트로 변환
+                })
+                .then(data => {
+                    document.getElementById('bible-content').innerText = data; // 가져온 데이터 표시
+                })
+                .catch(error => console.error('Error fetching data:', error)); // 에러 처리
+        }
+
+        // 폼 제출 이벤트 처리
+        function handleSubmit(event) {
+            event.preventDefault(); // 기본 제출 동작 방지
+            fetchBible(); // API 요청 함수 호출
+        }
     </script>
 </head>
 <body>
-    <h1>Index</h1>
-    
-    <form action="/crawl" method="get">
-        <input type="text" name="url" placeholder="크롤링할 URL 입력" required>
-        <button type="submit">크롤링</button>
+    <h1>성경 리스트</h1>
+    <form onsubmit="handleSubmit(event)">
+        Bible ID 선택: <input type="text" id="bible-id-input" required />
+        <button type="submit">제출</button>
     </form>
-    
-    <span th:text="${doc}"></span>
+    <div id="bible-content">성경 구절이 여기에 표시됩니다.</div>
 </body>
 </html>
