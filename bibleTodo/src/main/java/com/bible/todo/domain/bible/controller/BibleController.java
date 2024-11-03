@@ -23,7 +23,6 @@ public class BibleController {
     // 성경 구절을 반환하는 API 엔드포인트
     @GetMapping("/{bible_id}")
     public ResponseEntity<String> getBible(@PathVariable("bible_id") int bible_id) {
-        System.out.println("bible_id = " + bible_id);
         String bibleContent = bibleService.getBible(bible_id);
         
         if (bibleContent != null) {

@@ -3,6 +3,8 @@ package com.bible.todo.domain.bible.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.bible.todo.domain.bible.vo.BibleVo;
+
 @Mapper
 public interface BibleMapper {
 	
