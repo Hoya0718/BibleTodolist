@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>성경 리스트</title>
-    <script>
+<meta charset="UTF-8">
+<title>성경 리스트</title>
+<script>
         // API 요청을 처리하는 함수
         function fetchBible() {
             const bibleId = document.getElementById('bible-id-input').value; // 입력값 가져오기
@@ -28,11 +28,71 @@
     </script>
 </head>
 <body>
-    <h1>성경 리스트</h1>
-    <form onsubmit="handleSubmit(event)">
-        Bible ID 선택: <input type="text" id="bible-id-input" required />
-        <button type="submit">제출</button>
-    </form>
-    <div id="bible-content">성경 구절이 여기에 표시됩니다.</div>
+	<h1>성경 리스트</h1>
+	<form onsubmit="handleSubmit(event)">
+		<label for="bible-id-input">Bible ID 선택: </label> <input type="text"
+			id="bible-id-input" required />
+		<button type="submit">제출</button>
+	</form>
+	<div id="bible-content">성경 구절이 여기에 표시됩니다.</div>
+	<br>
+	<hr>
+	<h1>로그인</h1>
+	<form action="signIn" method="post">
+		<label for="user_id1">아이디: </label> <input type="text" id="user_id1"
+			name="user_id"> <label for="user_pw1">비밀번호: </label> <input
+			type="password" id="user_pw1" name="user_pw">
+		<button type="submit">로그인하기</button>
+	</form>
+	<br>
+	<hr>
+	
+	<h1>회원가입</h1>
+	<form action="/home" method="post">
+		<label for="user_id2">아이디 : </label> <input type="text" id="user_id2"
+			name="user_id" /><br> <label for="user_pw2">비밀번호 : </label> <input
+			type="password" id="user_pw2" name="user_pw" /><br> <label
+			for="user_name">이름 : </label> <input type="text" id="user_name"
+			name="user_name" /><br> 소속 :<br>
+		<!-- 교역자 -->
+		<input type="radio" name="user_department" id="교역자" value="교역자">
+		<label for="교역자">교역자</label><br>
+
+		<!-- 부교역자 -->
+		<input type="radio" name="user_department" id="부교역자" value="부교역자">
+		<label for="부교역자">부교역자</label><br>
+
+		<!-- 장년부 -->
+		<input type="radio" name="user_department" id="장년부" value="장년부">
+		<label for="장년부">장년부</label><br>
+
+		<!-- 청년부 -->
+		<input type="radio" name="user_department" id="청년부" value="청년부">
+		<label for="청년부">청년부</label><br>
+
+		<!-- 대학부 -->
+		<input type="radio" name="user_department" id="대학부" value="대학부">
+		<label for="대학부">대학부</label><br>
+
+		<!-- 중고등부 -->
+		<input type="radio" name="user_department" id="중고등부" value="중고등부">
+		<label for="중고등부">중고등부</label><br>
+
+		<!-- 은하수 (초등부) -->
+		<input type="radio" name="user_department" id="초등부" value="은하수">
+		<label for="초등부">초등부</label><br>
+
+		<!-- 은하수 (어린이부) -->
+		<input type="radio" name="user_department" id="어린이부" value="은하수">
+		<label for="어린이부">어린이부</label><br> 
+		
+		성별 : <br> 
+		<input type="radio" name="user_gender" id="남성" value="M">
+		<label for="남성">남성</label><br> 
+		<input type="radio" name="user_gender" id="여성" value="W"> 
+		<label for="여성">여성</label><br> <br>
+
+		<button type="submit">회원가입</button>
+	</form>
 </body>
 </html>
