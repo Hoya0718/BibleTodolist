@@ -3,12 +3,8 @@
 
 <mapper namespace="com.bible.todo.domain.user.mapper.UserMapper">
 
-    <select id="getBible" parameterType="int" resultType="String">
-        SELECT content FROM bible WHERE bible_id = #{bible_id}
-    </select>
-
 	<insert id="signUp" parameterType="com.bible.todo.domain.user.vo.UserVo">
-		INSERT INTO user VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_department}, #{user_gender})
+		INSERT INTO user(user_id, user_pw, user_name, user_department, user_gender) VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_department}, #{user_gender})
 	</insert>
 	
 	<select id="signIn" parameterType="map" resultType="String">

@@ -19,18 +19,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/home")
+    @PostMapping("/index")
     public String signUp(@ModelAttribute UserVo userVo) {
-        // 회원가입 처리
         userService.signUp(userVo);
-        // 회원가입 후 index로 리다이렉트
-        return "redirect:/home";  // 리다이렉트 처리
+        return "redirect:/index";  // 회원가입 후 인덱스 페이지로 리다이렉트
     }
-   
-    @GetMapping("/home")
+    
+    @GetMapping("/index")
     public String showHomePage() {
-        // "home.html"을 static 폴더에서 처리하려면 리다이렉트
-        return "redirect:/home.html"; // static 폴더의 home.html로 리다이렉트
+        return "forward:/static/index.html";  // 'index.html'을 forward로 처리
+    }
+
+    @PostMapping("/signIn")
+    public String sign(@ModelAttribute UserVo userVo) {
+        userService.signIn(userVo);
+        return "redirect:/home";  // 로그인 후 /home으로 리디렉트
+    }
+
+    // 로그인 실패 후 /a로 리디렉션
+    @GetMapping("/a")
+    public String errorPage() {
+        return "forward:/static/a.html";  // 'a.html'을 forward로 처리
+    }
+
+    // 로그인 성공 후 /home
+    @GetMapping("/home")
+    public String getHome() {
+        return "forward:/static/home.html";  // 'home.html'을 forward로 처리
     }
 }
-
