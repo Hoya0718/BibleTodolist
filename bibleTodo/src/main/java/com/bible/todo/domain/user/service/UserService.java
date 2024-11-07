@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class UserService{
 	private final UserMapper userMapper;
-	
+
 	@Autowired
 	public UserService(UserMapper userMapper) {
 		this.userMapper = userMapper;
@@ -28,8 +29,8 @@ public class UserService{
 	}
 	
 	//로그인
-	public void signIn(UserVo userVo) {
-		return;
+	public UserVo signIn(UserVo userVo) {
+		return userMapper.signIn(userVo);
 	}
 	
 	//로그인 후 비밀번호 변경
@@ -45,5 +46,9 @@ public class UserService{
 	//비밀번호 변경
 	public ArrayList<String> editPw(String user_id, String user_pw) {
 		return userMapper.editPw(user_id, user_pw);
+	}
+
+	 public UserVo findByUsername(String user_id) {
+	        return userMapper.findByUsername(user_id);
 	}
 }

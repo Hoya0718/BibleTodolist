@@ -1,6 +1,7 @@
 package com.bible.todo.domain.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.bible.todo.domain.user.service.UserService;
 import com.bible.todo.domain.user.vo.UserVo;
 
+
 @Controller
-public class UserController {
+public class UserController{
 
     private final UserService userService;
 
@@ -30,16 +32,10 @@ public class UserController {
         return "forward:/static/index.html";  // 'index.html'을 forward로 처리
     }
 
-    @PostMapping("/signIn")
-    public String sign(@ModelAttribute UserVo userVo) {
-        userService.signIn(userVo);
-        return "redirect:/home";  // 로그인 후 /home으로 리디렉트
-    }
-
-    // 로그인 실패 후 /a로 리디렉션
-    @GetMapping("/a")
-    public String errorPage() {
-        return "forward:/static/a.html";  // 'a.html'을 forward로 처리
+    //로그인 프로세스 동작 -> 시큐리티가 처리하기 때문에 구게적인 로직 구현X
+    @PostMapping("/")
+    public  ResponseEntity<?> authenticateUser() {
+       return ResponseEntity.ok().build();
     }
 
     // 로그인 성공 후 /home

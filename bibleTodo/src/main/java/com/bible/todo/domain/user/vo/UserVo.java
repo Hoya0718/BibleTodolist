@@ -9,4 +9,5 @@ public class UserVo {
 	private String user_name;
 	private String user_department;
 	private String user_gender;
+	private Boolean enabled;
 }

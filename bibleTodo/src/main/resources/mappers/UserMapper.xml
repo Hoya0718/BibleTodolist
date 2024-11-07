@@ -20,6 +20,7 @@
 		UPDATE user SET user_pw = #{user_pw} where user_id = #{user_id}
 	</update>
 	
-	
-	
+	<select id="findByUsername" resultType="UserVo">
+		SELECT * FROM users WHERE user_id = #{user_id}
+	</select>
 </mapper>

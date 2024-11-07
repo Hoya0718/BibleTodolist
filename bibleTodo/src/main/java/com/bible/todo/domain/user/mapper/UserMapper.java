@@ -14,9 +14,6 @@ public interface UserMapper {
 	//회원가입
 	void signUp(UserVo userVo);
 	
-	//로그인 -> 아이디, 비밀번호
-	//void signIn(@Param("user_id") String user_id, @Param("user_pw") String user_pw);
-	
 	//마이페이지에서 비번 변경 -> 비밀번호
 	String checkPw(@Param("user_id") String user_id);
 	
@@ -26,6 +23,8 @@ public interface UserMapper {
 	//비번변경 파라미터 -> 바꿀 비밀번호  
 	ArrayList<String> editPw(@Param("user_id") String user_id,  @Param("user_pw")String user_pw );
 
-	Object signIn(UserVo userVo);
+	UserVo signIn(UserVo userVo);
+
+    UserVo findByUsername(String username);
 	
 }
