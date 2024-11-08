@@ -7,7 +7,7 @@
         // API 요청을 처리하는 함수
         function fetchBible() {
             const bibleId = document.getElementById('bible-id-input').value; // 입력값 가져오기
-            fetch(`/api/${bibleId}`)  // API 요청
+            fetch(`/api/j${bibleId}`)  // API 요청
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -29,6 +29,7 @@
 </head>
 <body>
 	<h1>성경 리스트</h1>
+	<h2 id="userName">환영합니다. </h2>
 	<form onsubmit="handleSubmit(event)">
 		<label for="bible-id-input">Bible ID 선택: </label> <input type="text"
 			id="bible-id-input" required />

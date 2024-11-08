@@ -13,6 +13,7 @@
 		
 		<label for="user_pw1">비밀번호: </label> 
 		<input type="password" id="user_pw1" name="password" placeholder="pw">
+		<input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
 		<button type="submit">로그인하기</button>
 	</form>
 	<br>
