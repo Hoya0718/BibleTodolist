@@ -1,8 +1,6 @@
 package com.bible.todo.domain.user.mapper;
 
 import java.util.ArrayList;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,9 +8,6 @@ import com.bible.todo.domain.user.vo.UserVo;
 
 @Mapper
 public interface UserMapper {
-	
-	//회원가입
-	void signUp(UserVo userVo);
 	
 	//마이페이지에서 비번 변경 -> 비밀번호
 	String checkPw(@Param("user_id") String user_id);

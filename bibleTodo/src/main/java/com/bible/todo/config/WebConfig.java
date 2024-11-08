@@ -14,13 +14,16 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
 
         // 특정 경로로 요청 시 해당 HTML 파일을 제공
-        registry.addResourceHandler("/home")
-                .addResourceLocations("classpath:/static/home.html");
+        registry.addResourceHandler("/")
+                .addResourceLocations("classpath:/static/index.html");
 
         registry.addResourceHandler("/index")
                 .addResourceLocations("classpath:/static/index.html");
 
-        registry.addResourceHandler("/a")
-                .addResourceLocations("classpath:/static/a.html");
+        registry.addResourceHandler("/admin")
+                .addResourceLocations("classpath:/static/admin.html");
+        
+        registry.addResourceHandler("/join")
+        		.addResourceLocations("classpath:/static/join.html");
     }
 }

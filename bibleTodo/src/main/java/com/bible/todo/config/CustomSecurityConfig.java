@@ -1,21 +1,12 @@
 package com.bible.todo.config;
 
-import java.io.IOException;
-
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 @Configuration
@@ -30,43 +21,36 @@ public class CustomSecurityConfig {
 
         // 모든 요청을 허용 (인증 없이 접근 가능)
         http
-        	.authorizeHttpRequests((auth) ->
-        	auth
-        		.requestMatchers("/", "/login").permitAll()
-        		.requestMatchers("/admin").hasRole("ADMIN")
-        		.requestMatchers("my/**").hasAnyRole("ADMIN", "USER")
-        		.anyRequest().authenticated()
-        		)
-        	.formLogin((formLogin) ->
-        		formLogin
-        			.loginPage("/index") //사용자 정의 로그인 페이지
-        			.defaultSuccessUrl("/home") //로그인 성공 후 이동 페이지
-        			.failureUrl("/a")
-        			.loginProcessingUrl("index")
-        			.successHandler(
-        					new AuthenticationSuccessHandler() {
-        						   @Override
-        						    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        						      System.out.println("authentication: " + authentication.getName());
-        						      //로그인에 성공한 유저의 이름
-        						      response.sendRedirect("/");
-        						    }
-        						  })
-        			
-        			)
-        	.csrf(AbstractHttpConfigurer::disable)
+    	.csrf((auth) ->
+    		auth
+    			.ignoringRequestMatchers("/joinProc")
+    			.disable()
+    	);
+        
+        http
         	.authorizeHttpRequests((auth) ->
         		auth
-        			.requestMatchers("/static/**", "/", "/index", "/home", "/a", "/home.html", "/index.html", "/a.html", "/signIn").permitAll()
-        			);// 정적 리소스에 대한 접근 허용
+        			.requestMatchers("/login", "/join", "/login.html", "/join.html", "/joinProc").permitAll()
+        			.requestMatchers("/admin.html").hasRole("ADMIN")
+        			.requestMatchers("/static/**", "/", "index", "index.html").hasAnyRole("ADMIN", "USER")
+        			.anyRequest().authenticated()
+        		);
+        
+        http
+        	.formLogin((auth) -> //로그인이 필요할 떄 로그인 사이트로 이동 가능하게
+        		auth
+        			.loginPage("/login") //사용자 정의 로그인 페이지
+        			.loginProcessingUrl("/loginProc") //로그인 프로세싱 URL 로그인 페이지의 action
+        			.permitAll()
+        		);
 
         log.info("---------- Security Configuration Complete ----------");
 
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
+    @Bean //어느곳이든 호출 가능
+    public BCryptPasswordEncoder bCryptPasswordEncoder() { //메서드 호출 시 BCryptPasswordEncoder() 생성
         // 비밀번호 암호화 방식 설정
         return new BCryptPasswordEncoder();
     }
