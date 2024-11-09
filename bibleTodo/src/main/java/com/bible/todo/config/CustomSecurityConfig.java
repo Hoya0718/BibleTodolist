@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.bible.todo.domain.oauth2.CustomOauth2UserService;
+
 import lombok.extern.log4j.Log4j2;
 
 @Configuration
@@ -41,7 +43,12 @@ public class CustomSecurityConfig {
         log.info("---------- Security Configuration Started ----------");
 
         http
-    	.oauth2Login(Customizer.withDefaults());
+    	.oauth2Login((oauth2) -> oauth2
+    		.userInfoEndpoint(
+    				userInfoEndPointConfig ->userInfoEndPointConfig
+    					.userService(CustomOauth2UserService)
+    		)
+    	);
         
         http
     	.csrf((auth) ->
