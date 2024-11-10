@@ -37,8 +37,4 @@ public class UserService{
 	public ArrayList<String> editPw(String user_id, String user_pw) {
 		return userMapper.editPw(user_id, user_pw);
 	}
-
-	 public UserVo findByUsername(String user_id) {
-	        return userMapper.findByUsername(user_id);
-	}
 }

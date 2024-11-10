@@ -20,7 +20,15 @@
 		UPDATE user SET user_pw = #{user_pw} where user_id = #{user_id}
 	</update>
 	
-	<select id="findByUsername" resultType="UserVo">
-		SELECT * FROM users WHERE user_id = #{user_id}
+	<select id="findByUsername" parameterType="String" resultType="com.bible.todo.domain.user.vo.UserVo">
+		SELECT user_name FROM user WHERE user_name = #{user_name}
 	</select>
+	
+	<insert id="save" parameterType="com.bible.todo.domain.user.vo.UserVo">
+		INSERT INTO user(user_id, user_name, user_role) VALUES(#{user_id}, #{user_name}, #{user_role})
+	</insert>
+	
+	<update id="updateUser" parameterType="com.bible.todo.domain.user.vo.UserVo">
+		UPDATE user SET user_id=#{user_id}, user_name=#{user_name}, user_role=#{user_role}
+	</update>
 </mapper>

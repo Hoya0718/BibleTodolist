@@ -19,6 +19,11 @@ import lombok.extern.log4j.Log4j2;
 @EnableWebSecurity //시큐리티 활성화
 public class CustomSecurityConfig {
 	
+	private final CustomOauth2UserService customOAuth2UserService;
+	
+	public CustomSecurityConfig(CustomOauth2UserService customOAuth2UserService) {
+		this.customOAuth2UserService = customOAuth2UserService;
+	}
 	//계층 권한
 	//@Bean
 	//public RoleHierarchy roleHierarchy() {
@@ -44,9 +49,8 @@ public class CustomSecurityConfig {
 
         http
     	.oauth2Login((oauth2) -> oauth2
-    		.userInfoEndpoint(
-    				userInfoEndPointConfig ->userInfoEndPointConfig
-    					.userService(CustomOauth2UserService)
+    		.userInfoEndpoint((userInfoEndPointConfig) -> //데이터를 받을 수 있는 유저 디테일 서비스
+    			userInfoEndPointConfig.userService(customOAuth2UserService)
     		)
     	);
         
@@ -60,7 +64,7 @@ public class CustomSecurityConfig {
         http
         	.authorizeHttpRequests((auth) ->
         		auth
-        			.requestMatchers("/login", "/join", "/login.html", "/join.html", "/joinProc","/oauth2/**").permitAll()
+        			.requestMatchers("/login", "/join", "/login.html", "/join.html", "/joinProc", "/oauth2/**").permitAll()
         			.requestMatchers("/admin.html").hasRole("ADMIN")
         			.requestMatchers("/static/**", "/", "index", "index.html").hasAnyRole("ADMIN", "USER")
         			.anyRequest().authenticated()
@@ -78,7 +82,7 @@ public class CustomSecurityConfig {
         http
         	.sessionManagement((auth) -> 
         		auth
-        			.maximumSessions(3) //
+        			.maximumSessions(1) //
         			.maxSessionsPreventsLogin(true) //최대 로그인 허용치 초과 시 true-> 새로운 로그인 차단, false -> 기존 세션 하나 삭제
         	
         			);

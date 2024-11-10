@@ -21,5 +21,9 @@ public interface UserMapper {
 	UserVo signIn(UserVo userVo);
 
     UserVo findByUsername(String username);
+    
+    void save(UserVo userVo);
+   
+    void updateUser(UserVo userVo);
 	
 }
