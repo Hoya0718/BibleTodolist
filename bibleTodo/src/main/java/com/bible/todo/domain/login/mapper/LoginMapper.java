@@ -7,5 +7,5 @@ import com.bible.todo.domain.user.vo.UserVo;
 
 @Mapper
 public interface LoginMapper {
-	UserVo findByUserId(String user_id);
+	String findByUserId(UserVo userVo);
 }

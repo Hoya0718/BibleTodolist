@@ -1,4 +1,6 @@
-package com.bible.todo.domain;
+/*
+ * package com.bible.todo.domain;
+ 
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,3 +60,4 @@ public class CustomUserDetails implements UserDetails{
 	}
 	
 }
+*/

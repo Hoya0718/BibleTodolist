@@ -1,4 +1,4 @@
-package com.bible.todo.config;
+/*package com.bible.todo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,20 +10,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.bible.todo.domain.oauth2.CustomOauth2UserService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Configuration
 @Log4j2
 @EnableWebSecurity //시큐리티 활성화
+@RequiredArgsConstructor
 public class CustomSecurityConfig {
 	
-	private final CustomOauth2UserService customOAuth2UserService;
+	//private final CustomOauth2UserService customOAuth2UserService;
 	
-	public CustomSecurityConfig(CustomOauth2UserService customOAuth2UserService) {
-		this.customOAuth2UserService = customOAuth2UserService;
-	}
 	//계층 권한
 	//@Bean
 	//public RoleHierarchy roleHierarchy() {
@@ -47,12 +45,12 @@ public class CustomSecurityConfig {
         
         log.info("---------- Security Configuration Started ----------");
 
-        http
-    	.oauth2Login((oauth2) -> oauth2
-    		.userInfoEndpoint((userInfoEndPointConfig) -> //데이터를 받을 수 있는 유저 디테일 서비스
-    			userInfoEndPointConfig.userService(customOAuth2UserService)
-    		)
-    	);
+//        http
+//    	.oauth2Login((oauth2) -> oauth2
+//    		.userInfoEndpoint((userInfoEndPointConfig) -> //데이터를 받을 수 있는 유저 디테일 서비스
+//    			userInfoEndPointConfig.userService(customOAuth2UserService)
+//    		)
+//    	);
         
         http
     	.csrf((auth) ->
@@ -64,10 +62,11 @@ public class CustomSecurityConfig {
         http
         	.authorizeHttpRequests((auth) ->
         		auth
-        			.requestMatchers("/login", "/join", "/login.html", "/join.html", "/joinProc", "/oauth2/**").permitAll()
-        			.requestMatchers("/admin.html").hasRole("ADMIN")
-        			.requestMatchers("/static/**", "/", "index", "index.html").hasAnyRole("ADMIN", "USER")
-        			.anyRequest().authenticated()
+        		.anyRequest().permitAll());
+        			//.requestMatchers("/template/**","/static/**", "/", "/static/index","/static/index.html", "/login", "/join", "/joinProc", "/oauth2/**").permitAll()
+        			//.requestMatchers("/admin.html").hasRole("ADMIN")
+        			//.requestMatchers("/static/**", "/", "index", "index.html").hasAnyRole("ADMIN", "USER")
+        			//.anyRequest().authenticated()
         		);
         
         http
@@ -113,3 +112,4 @@ public class CustomSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+*/

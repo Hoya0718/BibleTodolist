@@ -1,3 +1,4 @@
+/*
 package com.bible.todo.domain.login.controller;
 
 import org.springframework.security.core.Authentication;
@@ -26,3 +27,4 @@ public class LogoutController {
         return "redirect:/";
     }
 }
+*/
