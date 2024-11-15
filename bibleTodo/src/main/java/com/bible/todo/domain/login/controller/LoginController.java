@@ -1,19 +1,28 @@
 package com.bible.todo.domain.login.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bible.todo.domain.login.dto.LoginDTO;
 import com.bible.todo.domain.login.service.LoginService;
 
 
 import jakarta.servlet.http.HttpSession;
-
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class LoginController {
 	private final LoginService loginService;
 	
@@ -23,16 +32,19 @@ public class LoginController {
 	}
 	
 	@PostMapping("/loginProc")
-	public String loginProc(HttpSession session, LoginDTO loginDTO) {
+	public ResponseEntity<Map<String, String>> loginProc(@RequestBody LoginDTO loginDTO, HttpSession session) {
 		String getId = loginService.LoginProc(loginDTO);
+		Map<String, String> response = new HashMap<>();
 		
 		if(getId == null) {
 			System.out.println("아이디가/비밀번호가 틀리거나 존재하지 않습니다.");
-			return "redirect:/login";
+			response.put("message", "아이디가/비밀번호가 틀리거나 존재하지 않습니다.");
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 로그인 실패 응답
 		}
 		
-		session.setAttribute("userId", getId);
-		return "admin";
+		 session.setAttribute("userId", getId);
+		 response.put("message", "success");	
+		 return ResponseEntity.ok(response);  // 로그인 성공 응답
 	}
 	
 	@PostMapping("logoutProc")

@@ -1,47 +1,56 @@
 package com.bible.todo.domain.join.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bible.todo.domain.join.dto.JoinDTO;
 import com.bible.todo.domain.join.service.JoinService;
-import com.bible.todo.domain.user.vo.UserVo;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
-@Controller
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class JoinController {
 	private final JoinService joinService;
 	
-	
 	@GetMapping("/join")
 	public String joinP() {
 		return "join";
-		
+	}
+	
+	@GetMapping("/exam")
+	public Map<String, String> exam() {
+		Map<String, String> map = new HashMap<>();
+		map.put("message", "Hello World");
+		return map;
 	}
 	
 	@PostMapping("/joinProc")
-	public String joinProcess(@Valid @ModelAttribute JoinDTO joinDTO,BindingResult result) {
-		
+	public ResponseEntity<Map<String, String>> joinProcess(@RequestBody JoinDTO joinDTO,BindingResult result) {
 	
-		
+		Map<String, String> response = new HashMap<>();
 
-		
-		System.out.println(joinDTO);
 		if(result.hasErrors()) {
-			return "redirect:/join";
+			System.err.println("회원가입 실패했습니다.");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 회워가입 실패 응답
 		}
-				
 		joinService.joinProcess(joinDTO);
-		return "redirect:/login";
+		response.put("message","success");
+		return ResponseEntity.ok(response);
 	}
 	
 }
