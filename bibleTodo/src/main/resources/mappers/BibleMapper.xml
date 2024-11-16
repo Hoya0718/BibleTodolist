@@ -7,4 +7,7 @@
         SELECT content FROM bible WHERE bible_id = #{bible_id}
     </select>
 
+	<select id="getTestamentList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+		SELECT  distinct list FROM bible WHERE testament = #{testament}
+	</select>
 </mapper>
