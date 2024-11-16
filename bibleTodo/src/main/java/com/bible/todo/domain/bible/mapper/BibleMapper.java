@@ -15,4 +15,8 @@ public interface BibleMapper {
 	String getBible(@Param("bible_id") int bible_id);
 	
 	List<String> getTestamentList(BibleVo bibleVo);
+	
+	List<String> getChapter(BibleVo bibleVo);
+	
+	List<String> getVerse(BibleVo bibleVo);
 }

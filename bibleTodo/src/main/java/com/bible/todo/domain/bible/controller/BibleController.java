@@ -52,7 +52,21 @@ public class BibleController {
     public ResponseEntity<List<String>> getBibleTestament(@RequestBody BibleDTO bibleDTO){
     	List<String> list = new ArrayList<>();
     	list = bibleService.getTestamentList(bibleDTO.getTestament());
-    	System.out.println(list);
     	return ResponseEntity.ok(list);
+    }
+    
+    @PostMapping("/getChapter")
+    public ResponseEntity<List<String>> getChapter(@RequestBody BibleDTO bibleDTO){
+    	List<String> chapter = new ArrayList<>();
+    	chapter = bibleService.getChapter(bibleDTO.getList());
+    	return ResponseEntity.ok(chapter);
+    }
+    
+    @PostMapping("/getVerse")
+    public ResponseEntity<List<String>> getVerse(@RequestBody BibleDTO bibleDTO){
+    	System.out.println(bibleDTO.getChapter() + " " + bibleDTO.getList());
+    	List<String> verse = new ArrayList<>();
+    	verse = bibleService.getVerse(bibleDTO);
+    	return ResponseEntity.ok(verse);
     }
 }

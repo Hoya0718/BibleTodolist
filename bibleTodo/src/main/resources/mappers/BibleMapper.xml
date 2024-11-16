@@ -10,4 +10,12 @@
 	<select id="getTestamentList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
 		SELECT  distinct list FROM bible WHERE testament = #{testament}
 	</select>
+	
+	<select id="getChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+		SELECT distinct chapter FROM bible WHERE LIST = #{list};
+	</select>
+	
+	<select id="getVerse" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+		SELECT verse FROM bible WHERE list = #{list} and chapter = #{chapter}
+	</select>
 </mapper>
