@@ -1,6 +1,7 @@
 package com.bible.todo.domain.bible.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,4 +20,8 @@ public interface BibleMapper {
 	List<String> getChapter(BibleVo bibleVo);
 	
 	List<String> getVerse(BibleVo bibleVo);
+	
+	Map<String, Object> getContent(BibleVo bibleVo);
+	
+	List<Map<String, Object>> getSelectedContent(BibleVo bibleVo);
 }

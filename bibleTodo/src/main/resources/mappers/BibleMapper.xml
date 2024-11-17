@@ -18,4 +18,16 @@
 	<select id="getVerse" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
 		SELECT verse FROM bible WHERE list = #{list} and chapter = #{chapter}
 	</select>
+	
+	<select id="getContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
+		SELECT verse, content FROM bible WHERE list =#{list} AND chapter =#{chapter}
+	</select>
+	
+	<select id="getSelectedContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
+		SELECT verse, content FROM bible 
+		WHERE list = #{list} 
+		AND chapter = #{chapter} 
+		AND CAST(SUBSTRING(verse, 1, LENGTH(verse) -1 ) AS UNSIGNED) >= #{verse}
+	</select>
+
 </mapper>

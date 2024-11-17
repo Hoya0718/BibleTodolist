@@ -49,24 +49,39 @@ public class BibleController {
     }
     
     @PostMapping("/getBibleTestament")
-    public ResponseEntity<List<String>> getBibleTestament(@RequestBody BibleDTO bibleDTO){
+    public ResponseEntity<List<String>> getBibleTestament(@RequestBody BibleDTO bibleDTO) {
     	List<String> list = new ArrayList<>();
     	list = bibleService.getTestamentList(bibleDTO.getTestament());
     	return ResponseEntity.ok(list);
     }
     
     @PostMapping("/getChapter")
-    public ResponseEntity<List<String>> getChapter(@RequestBody BibleDTO bibleDTO){
+    public ResponseEntity<List<String>> getChapter(@RequestBody BibleDTO bibleDTO) {
     	List<String> chapter = new ArrayList<>();
     	chapter = bibleService.getChapter(bibleDTO.getList());
     	return ResponseEntity.ok(chapter);
     }
     
     @PostMapping("/getVerse")
-    public ResponseEntity<List<String>> getVerse(@RequestBody BibleDTO bibleDTO){
-    	System.out.println(bibleDTO.getChapter() + " " + bibleDTO.getList());
+    public ResponseEntity<List<String>> getVerse(@RequestBody BibleDTO bibleDTO) {
     	List<String> verse = new ArrayList<>();
     	verse = bibleService.getVerse(bibleDTO);
     	return ResponseEntity.ok(verse);
+    }
+    @PostMapping("/getContent")
+    public ResponseEntity<Map<String, Object>> getContent(@RequestBody BibleDTO bibleDTO) {
+    	System.out.println(bibleDTO);
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("list", bibleDTO.getList());
+    	map.put("chapter", bibleDTO.getChapter());
+    	map = bibleService.getContent(bibleDTO);
+    	System.out.println(map);
+    	return ResponseEntity.ok(map);
+    }
+    
+    @PostMapping("/getSelectedContent")
+    public ResponseEntity<List<Map<String,Object>>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
+    	List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
+    	return ResponseEntity.ok(result);
     }
 }

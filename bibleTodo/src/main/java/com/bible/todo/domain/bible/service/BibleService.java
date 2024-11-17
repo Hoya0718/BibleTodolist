@@ -9,6 +9,7 @@ import com.bible.todo.domain.bible.vo.BibleVo;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,21 @@ public class BibleService {
 		bibleVo.setChapter(bibleDTO.getChapter());
 		bibleVo.setList(bibleDTO.getList());
 		return bibleMapper.getVerse(bibleVo);
+	}
+	
+	public Map<String, Object> getContent(BibleDTO bibleDTO){
+		BibleVo bibleVo = new BibleVo();
+		bibleVo.setChapter(bibleDTO.getChapter());
+		bibleVo.setList(bibleDTO.getList());
+		return bibleMapper.getContent(bibleVo);
+	}
+	
+	public List<Map<String, Object>> getSelectedContent(BibleDTO bibleDTO){
+		BibleVo bibleVo = new BibleVo();
+		bibleVo.setChapter(bibleDTO.getChapter());
+		bibleVo.setList(bibleDTO.getList());
+		bibleVo.setVerse(bibleDTO.getVerse());
+		return bibleMapper.getSelectedContent(bibleVo);
 	}
 	
 }

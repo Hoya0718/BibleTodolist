@@ -8,4 +8,5 @@ public class BibleDTO {
 	private String testament;
 	private String chapter;
 	private String list;
+	private String verse;
 }
