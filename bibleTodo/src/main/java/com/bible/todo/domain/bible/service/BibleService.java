@@ -52,5 +52,6 @@ public class BibleService {
 		bibleVo.setVerse(bibleDTO.getVerse());
 		return bibleMapper.getSelectedContent(bibleVo);
 	}
+
 	
 }

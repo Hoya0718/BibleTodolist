@@ -84,4 +84,5 @@ public class BibleController {
     	List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
     	return ResponseEntity.ok(result);
     }
+
 }
