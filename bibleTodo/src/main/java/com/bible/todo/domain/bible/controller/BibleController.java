@@ -82,6 +82,7 @@ public class BibleController {
     @PostMapping("/getSelectedContent")
     public ResponseEntity<List<Map<String,Object>>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
     	List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
+    	System.out.println(result);
     	return ResponseEntity.ok(result);
     }
 

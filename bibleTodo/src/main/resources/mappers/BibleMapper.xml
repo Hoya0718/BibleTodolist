@@ -23,7 +23,7 @@
 		SELECT verse, content FROM bible WHERE list =#{list} AND chapter =#{chapter}
 	</select>
 	
-	<select id="getSelectedContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="List">
+	<select id="getSelectedContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
 		SELECT verse, content FROM bible 
 		WHERE list = #{list} 
 		AND chapter = #{chapter} 

@@ -34,7 +34,6 @@ public class LoginController {
 	@PostMapping("/loginProc")
 	public ResponseEntity<Map<String,Object>> loginProc(@RequestBody LoginDTO loginDTO) {
 		Map<String, Object> map = loginService.LoginProc(loginDTO);
-
 		return ResponseEntity.ok(map);
 		
 //		if(response.get(user_id) == null) {
