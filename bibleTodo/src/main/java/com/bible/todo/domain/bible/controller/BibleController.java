@@ -1,6 +1,7 @@
 package com.bible.todo.domain.bible.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,20 +71,46 @@ public class BibleController {
     }
     @PostMapping("/getContent")
     public ResponseEntity<Map<String, Object>> getContent(@RequestBody BibleDTO bibleDTO) {
-    	System.out.println(bibleDTO);
     	Map<String, Object> map = new HashMap<>();
     	map.put("list", bibleDTO.getList());
     	map.put("chapter", bibleDTO.getChapter());
     	map = bibleService.getContent(bibleDTO);
-    	System.out.println(map);
     	return ResponseEntity.ok(map);
     }
     
     @PostMapping("/getSelectedContent")
     public ResponseEntity<List<Map<String,Object>>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
     	List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
-    	System.out.println(result);
+    	String maxChapter = bibleService.getMaxChapter(bibleDTO.getList());
+        result.add(Collections.singletonMap("maxChapter", (Object) maxChapter));
     	return ResponseEntity.ok(result);
     }
+    
+    @PostMapping("/prevList")
+    public ResponseEntity<Map<String, Object>> prevList(@RequestBody BibleDTO bibleDTO) {
+    	Map<String, Object> map = bibleService.prevList(bibleDTO.getList());
+    	System.out.println(map);
+    	return ResponseEntity.ok(map);
+    }
+    
+    @PostMapping("/nextList")
+    public ResponseEntity<Map<String, Object>> nextList(@RequestBody BibleDTO bibleDTO) {
+    	Map<String, Object> map = bibleService.nextList(bibleDTO.getList());
+    	System.out.println(map);
+    	return ResponseEntity.ok(map);
+    }
+    //@GetMapping("/getBibleListMaxChapter")
+    //public ResponseEntity<List<Map<String, Object>>> getBibleListMaxChapter(){
+    //	List<Map<String, Object>> map = bibleService.getBibleListMaxChapter();
+    //	System.out.println(map);
+    // 	return ResponseEntity.ok(map);
+    //}
+    
+    //@PostMapping("/getMaxChapter")
+    //public ResponseEntity<String> getMaxChapter(@RequestBody String list) {
+    //	String maxChapter = bibleService.getMaxChapter(list);
+    //	System.out.println(maxChapter);
+    //	return ResponseEntity.ok(maxChapter);
+    //}
 
 }

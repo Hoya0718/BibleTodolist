@@ -29,5 +29,20 @@
 		AND chapter = #{chapter} 
 		AND CAST(SUBSTRING(verse, 1, LENGTH(verse) -1 ) AS UNSIGNED) >= #{verse}
 	</select>
-
+	
+	<select id="getMaxChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+		SELECT maxChapter from biblelistMaxChapter where list =#{list};
+	</select>
+	
+	<select id="getBibleListMaxChapter" resultType="Map">
+		SELECT * from biblelistMaxChapter;
+	</select>
+	
+	<select id="prevList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
+		select list maxChapter from biblelistMaxchapter WHERE id = (SELECT id-1 FROM biblelistMaxChapter WHERE LIST =#{list});
+	</select>
+	
+	<select id="nextList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
+		select list from biblelistMaxchapter WHERE id = (SELECT id+1 FROM biblelistMaxChapter WHERE LIST =#{list});
+	</select>
 </mapper>
