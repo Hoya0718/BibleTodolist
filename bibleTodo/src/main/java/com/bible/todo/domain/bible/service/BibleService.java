@@ -54,7 +54,7 @@ public class BibleService {
 		return bibleMapper.getSelectedContent(bibleVo);
 	}
 	
-	public String getMaxChapter(String list) {
+	public Integer getMaxChapter(String list) {
 	BibleVo bibleVo = new BibleVo();
 		bibleVo.setList(list);
 		return bibleMapper.getMaxChapter(bibleVo);

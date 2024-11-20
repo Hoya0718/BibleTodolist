@@ -79,24 +79,28 @@ public class BibleController {
     }
     
     @PostMapping("/getSelectedContent")
-    public ResponseEntity<List<Map<String,Object>>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
-    	List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
-    	String maxChapter = bibleService.getMaxChapter(bibleDTO.getList());
+    public ResponseEntity<List<Map<String, Object>>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
+        List<Map<String, Object>> result = bibleService.getSelectedContent(bibleDTO);
+        Integer maxChapter = bibleService.getMaxChapter(bibleDTO.getList());
+
+        // 한 번에 "maxChapter"와 그 값을 포함하는 맵을 생성하여 리스트에 추가
         result.add(Collections.singletonMap("maxChapter", (Object) maxChapter));
-    	return ResponseEntity.ok(result);
+        System.out.println("result"+result);
+        return ResponseEntity.ok(result);
     }
+
     
     @PostMapping("/prevList")
     public ResponseEntity<Map<String, Object>> prevList(@RequestBody BibleDTO bibleDTO) {
     	Map<String, Object> map = bibleService.prevList(bibleDTO.getList());
-    	System.out.println(map);
+    	System.out.println("전"+map);
     	return ResponseEntity.ok(map);
     }
     
     @PostMapping("/nextList")
     public ResponseEntity<Map<String, Object>> nextList(@RequestBody BibleDTO bibleDTO) {
     	Map<String, Object> map = bibleService.nextList(bibleDTO.getList());
-    	System.out.println(map);
+    	System.out.println("후"+map);
     	return ResponseEntity.ok(map);
     }
     //@GetMapping("/getBibleListMaxChapter")

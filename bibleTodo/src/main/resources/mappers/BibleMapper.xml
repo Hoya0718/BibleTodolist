@@ -27,10 +27,10 @@
 		SELECT verse, content FROM bible 
 		WHERE list = #{list} 
 		AND chapter = #{chapter} 
-		AND CAST(SUBSTRING(verse, 1, LENGTH(verse) -1 ) AS UNSIGNED) >= #{verse}
+		AND verse >= #{verse}
 	</select>
 	
-	<select id="getMaxChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+	<select id="getMaxChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Integer">
 		SELECT maxChapter from biblelistMaxChapter where list =#{list};
 	</select>
 	

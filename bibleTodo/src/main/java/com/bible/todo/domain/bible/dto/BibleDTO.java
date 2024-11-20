@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class BibleDTO {
-	private String bible_id;
+	private int bible_id;
 	private String testament;
-	private String chapter;
 	private String list;
-	private String verse;
+	private int chapter;
+	private int verse;
+	private String content;
 }

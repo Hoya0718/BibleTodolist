@@ -5,8 +5,8 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class CommentsVo {
-	private int no;
+public class CommentVo {
+	private int comment_id;
 	private String comment;
 	private int like_count;
 	private Date creation_date;

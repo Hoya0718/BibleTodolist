@@ -25,7 +25,7 @@ public interface BibleMapper {
 	
 	List<Map<String, Object>> getSelectedContent(BibleVo bibleVo);
 	
-	String getMaxChapter(BibleVo bibleVo);
+	Integer getMaxChapter(BibleVo bibleVo);
 	
 	List<Map<String, Object>> getBibleListMaxChapter();
 	
