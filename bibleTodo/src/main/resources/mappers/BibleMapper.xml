@@ -27,7 +27,7 @@
 		SELECT verse, content FROM bible 
 		WHERE list = #{list} 
 		AND chapter = #{chapter} 
-		AND verse >= #{verse}
+		AND verse >= 1
 	</select>
 	
 	<select id="getMaxChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Integer">
@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="prevList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		select list maxChapter from biblelistMaxchapter WHERE id = (SELECT id-1 FROM biblelistMaxChapter WHERE LIST =#{list});
+		select list, maxChapter from biblelistMaxchapter WHERE id = (SELECT id-1 FROM biblelistMaxChapter WHERE LIST =#{list});
 	</select>
 	
 	<select id="nextList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">

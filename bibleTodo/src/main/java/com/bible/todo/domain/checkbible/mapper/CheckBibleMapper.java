@@ -1,0 +1,16 @@
+package com.bible.todo.domain.checkbible.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.bible.todo.domain.checkbible.vo.CheckBibleVo;
+
+@Mapper
+public interface CheckBibleMapper {
+	
+	void checkVerse(CheckBibleVo checkBibleVo);
+	
+	List<Map<String, Object>> hasCheck(CheckBibleVo checkBibleVo);
+}

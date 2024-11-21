@@ -50,7 +50,6 @@ public class BibleService {
 		BibleVo bibleVo = new BibleVo();
 		bibleVo.setChapter(bibleDTO.getChapter());
 		bibleVo.setList(bibleDTO.getList());
-		bibleVo.setVerse(bibleDTO.getVerse());
 		return bibleMapper.getSelectedContent(bibleVo);
 	}
 	

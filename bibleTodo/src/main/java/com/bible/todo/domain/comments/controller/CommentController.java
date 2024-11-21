@@ -24,14 +24,12 @@ public class CommentController {
 	
 	 @PostMapping("/writeComment")
 	    public void writeComment(@RequestBody CommentDTO commentDTO){
-		 	System.out.println(commentDTO);
 	    	commentService.writeComment(commentDTO);
 	    }
 	 
 	 @GetMapping("getComment")
 	 public ResponseEntity<List<Map<String, Object>>> getComment(){
 		 List<Map<String, Object>> list = commentService.getComment();
-		 System.out.println(list);
 		 return ResponseEntity.ok(list);
 	 }
 }
