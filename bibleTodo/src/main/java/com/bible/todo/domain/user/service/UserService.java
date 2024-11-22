@@ -8,15 +8,13 @@ import org.springframework.stereotype.Service;
 import com.bible.todo.domain.user.mapper.UserMapper;
 import com.bible.todo.domain.user.vo.UserVo;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service
+@RequiredArgsConstructor
 public class UserService{
 	private final UserMapper userMapper;
-
-	@Autowired
-	public UserService(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
 	
 	//로그인
 	public UserVo signIn(UserVo userVo) {

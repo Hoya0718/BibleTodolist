@@ -3,6 +3,9 @@
 
 <mapper namespace="com.bible.todo.domain.bible.mapper.BibleMapper">
 
+	<select id="getTestament" resultType="String">
+		SELECT distinct testament from bible;
+	</select>
     <select id="getBible" parameterType="int" resultType="String">
         SELECT content FROM bible WHERE bible_id = #{bible_id}
     </select>
@@ -45,4 +48,5 @@
 	<select id="nextList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
 		select list from biblelistMaxchapter WHERE id = (SELECT id+1 FROM biblelistMaxChapter WHERE LIST =#{list});
 	</select>
+
 </mapper>

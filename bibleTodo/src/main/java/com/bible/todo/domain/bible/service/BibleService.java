@@ -17,6 +17,10 @@ import java.util.Map;
 public class BibleService {
 	private final BibleMapper bibleMapper;
 	
+	public List<String> getTestament(){
+		return bibleMapper.getTestament();
+	}
+	
 	public String getBible(int bible_id) {
 		return bibleMapper.getBible(bible_id);
 	}

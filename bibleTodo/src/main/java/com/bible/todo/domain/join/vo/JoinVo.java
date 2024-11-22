@@ -1,14 +1,12 @@
-package com.bible.todo.domain.join.dto;
+package com.bible.todo.domain.join.vo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class JoinDTO {
-
-
-	@NotBlank(message = "id 입력은 필수 입니다.")
+public class JoinVo {
+	@NotBlank
 	private String id;
 	
 	@NotBlank
@@ -22,5 +20,4 @@ public class JoinDTO {
 	
 	@NotNull
 	private String gender;
-	
 }

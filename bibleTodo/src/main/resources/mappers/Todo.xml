@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bible.todo.domain.todo.mapper.TodoMapper">
+	
+	<insert id="saveTodo" parameterType="com.bible.todo.domain.todo.vo.TodoVo">
+		insert into todo(title, list, firstChapter, lastChapter, user_id) values(#{title}, #{list}, #{firstChapter}, #{lastChapter}, #{user_id});
+	</insert>
+	
+	<select id="getTodo" resultType="Map">
+		select id, title, status,user_id from todo
+	</select>
+	
+	<update id="updateStatus" parameterType="com.bible.todo.domain.todo.vo.TodoVo">
+		UPDATE todo SET status= #{status} WHERE id= #{id}
+	</update>
+</mapper>
