@@ -12,6 +12,6 @@
 	</select>
 	
 	<select id="getComment" parameterType="com.bible.todo.domain.comments.vo.CommentVo" resultType="Map">
-		select comment, like_count, creation_date, user_id from comments;
+		select comment, like_count, creation_date, user_id from comments order by creation_date desc;
 	</select>
 </mapper>

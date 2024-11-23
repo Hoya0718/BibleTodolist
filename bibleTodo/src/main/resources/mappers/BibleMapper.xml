@@ -1,59 +1,98 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bible.todo.domain.bible.mapper.BibleMapper">
+<mapper
+	namespace="com.bible.todo.domain.bible.mapper.BibleMapper">
 
 	<select id="getTestament" resultType="String">
-		SELECT distinct testament from bible;
+		SELECT distinct testament
+		from bible;
 	</select>
-    <select id="getBible" parameterType="int" resultType="String">
-        SELECT content FROM bible WHERE bible_id = #{bible_id}
-    </select>
+	<select id="getBible" parameterType="int" resultType="String">
+		SELECT content FROM bible WHERE bible_id = #{bible_id}
+	</select>
 
-	<select id="getTestamentList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
-		SELECT  distinct list FROM bible WHERE testament = #{testament}
+	<select id="getTestamentList"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="String">
+		SELECT distinct list FROM bible WHERE testament =
+		#{testament}
 	</select>
-	
-	<select id="getChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
+
+	<select id="getChapter"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="String">
 		SELECT distinct chapter FROM bible WHERE LIST = #{list};
 	</select>
-	
-	<select id="getVerse" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="String">
-		SELECT verse FROM bible WHERE list = #{list} and chapter = #{chapter}
-	</select>
-	
-	<select id="getContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		SELECT verse, content FROM bible WHERE list =#{list} AND chapter =#{chapter}
-	</select>
-	
-	<select id="getSelectedContent" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		SELECT verse, content FROM bible 
-		WHERE list = #{list} 
-		AND chapter = #{chapter} 
-		AND verse = #{verse}
-	</select>
-	
-	<select id="getMaxChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Integer">
-		SELECT maxChapter from biblelistMaxChapter where list =#{list};
-	</select>
-	
-	<select id="getBibleListMaxChapter" resultType="Map">
-		SELECT * from biblelistMaxChapter;
-	</select>
-	
-	<select id="prevList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		select list, maxChapter from biblelistMaxchapter WHERE id = (SELECT id-1 FROM biblelistMaxChapter WHERE LIST =#{list});
-	</select>
-	
-	<select id="nextList" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		select list from biblelistMaxchapter WHERE id = (SELECT id+1 FROM biblelistMaxChapter WHERE LIST =#{list});
+
+	<select id="getVerse"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="String">
+		SELECT verse FROM bible WHERE list = #{list} and chapter =
+		#{chapter}
 	</select>
 
-	<select id="getMaxVerse" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		SELECT  list, chapter, verse as 'maxVerse' FROM bible WHERE list= #{list} and chapter= #{chapter} ORDER BY verse DESC LIMIT 1;
+	<select id="getContent"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		SELECT verse, content FROM bible WHERE list =#{list} AND
+		chapter =#{chapter}
 	</select>
-	
-	<select id="nextChapter" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="Map">
-		SELECT list, chapter, verse FROM bible WHERE list= #{list} and chapter= #{chapter} and verse = 1; 
+
+	<select id="getSelectedContent"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		SELECT verse, content FROM bible
+		WHERE list = #{list}
+		AND chapter = #{chapter}
+		AND verse = #{verse}
+	</select>
+
+	<select id="getMaxChapter"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Integer">
+		SELECT maxChapter from biblelistMaxChapter where list
+		=#{list};
+	</select>
+
+	<select id="getBibleListMaxChapter" resultType="Map">
+		SELECT * from
+		biblelistMaxChapter;
+	</select>
+
+	<select id="prevList"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		select list, maxChapter from biblelistMaxchapter WHERE id =
+		(SELECT id-1 FROM biblelistMaxChapter WHERE LIST =#{list});
+	</select>
+
+	<select id="nextList"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		select list from biblelistMaxchapter WHERE id = (SELECT
+		id+1 FROM biblelistMaxChapter WHERE LIST =#{list});
+	</select>
+
+	<select id="getMaxVerse"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		SELECT list, chapter, verse as 'maxVerse' FROM bible WHERE
+		list= #{list} and chapter= #{chapter} ORDER BY verse DESC LIMIT 1;
+	</select>
+
+	<select id="nextChapter"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		SELECT list, chapter, verse FROM bible WHERE list= #{list}
+		and chapter= #{chapter} and verse = 1;
+	</select>
+
+	<select id="SearchWord"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="Map">
+		SELECT list, chapter, verse, content
+		FROM bible
+		WHERE content like CONCAT(#{content},'%');
 	</select>
 </mapper>

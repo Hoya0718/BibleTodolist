@@ -110,4 +110,11 @@ public class BibleController {
 		Map<String, Object> map = bibleService.getMaxVerse(bibleDTO);
 		return ResponseEntity.ok(map);
 	}
+	
+	@PostMapping("/SearchWord")
+	public ResponseEntity<List<Map<String, Object>>> SearchWord(@RequestBody BibleDTO bibleDTO) {
+		List<Map<String, Object>> list = bibleService.SearchWord(bibleDTO);
+		System.out.println("실행" + list);
+		return ResponseEntity.ok(list);
+	}
 }

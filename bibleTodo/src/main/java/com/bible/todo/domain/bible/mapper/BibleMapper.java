@@ -35,4 +35,6 @@ public interface BibleMapper {
 	Map<String, Object> nextList(BibleVo bibleVo);
 	
 	Map<String, Object>getMaxVerse(BibleVo bibleVo);
+	
+	List<Map<String, Object>>SearchWord(BibleVo bibleVo);
 }
