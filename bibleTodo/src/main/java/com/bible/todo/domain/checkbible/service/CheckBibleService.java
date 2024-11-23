@@ -29,7 +29,6 @@ public class CheckBibleService {
 
         // bible_id 가져오기
         int bible_id = commentMapper.getBibleId(bibleVo); // 해당 bible_id를 가져와 bible_id에 넣었음
-        System.out.println("가져온 bible id값 : " + bible_id);
 
         // 해당 bible_id에 대한 체크 여부 확인
         hasCheck(checkBibleDTO, bible_id);

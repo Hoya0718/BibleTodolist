@@ -9,6 +9,7 @@ import com.bible.todo.domain.bible.vo.BibleVo;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,11 +51,19 @@ public class BibleService {
 		return bibleMapper.getContent(bibleVo);
 	}
 	
-	public List<Map<String, Object>> getSelectedContent(BibleDTO bibleDTO){
+	public Map<String, Object> getSelectedContent(BibleDTO bibleDTO){
 		BibleVo bibleVo = new BibleVo();
 		bibleVo.setChapter(bibleDTO.getChapter());
 		bibleVo.setList(bibleDTO.getList());
-		return bibleMapper.getSelectedContent(bibleVo);
+		bibleVo.setVerse(bibleDTO.getVerse());
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		Map<String, Object> map1 = bibleMapper.getSelectedContent(bibleVo);
+		Map<String, Object> map2 = bibleMapper.getMaxVerse(bibleVo);
+		resultMap.putAll(map1);
+		resultMap.putAll(map2);
+		return resultMap;
+		
 	}
 	
 	public Integer getMaxChapter(String list) {
@@ -77,5 +86,12 @@ public class BibleService {
 		BibleVo bibleVo = new BibleVo();
 		bibleVo.setList(list);
 		return bibleMapper.nextList(bibleVo);
+	}
+	
+	public Map<String, Object>getMaxVerse(BibleDTO bibleDTO){
+		BibleVo bibleVo = new BibleVo();
+		bibleVo.setList(bibleDTO.getList());
+		bibleVo.setChapter(bibleDTO.getChapter());
+		return bibleMapper.getMaxVerse(bibleVo);
 	}
 }
