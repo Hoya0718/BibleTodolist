@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bible.todo.domain.bible.dto.BibleDTO;
+import com.bible.todo.domain.bible.dto.BibleLikeDTO;
 import com.bible.todo.domain.bible.service.BibleService;
 
 import lombok.RequiredArgsConstructor;
@@ -116,5 +117,10 @@ public class BibleController {
 		List<Map<String, Object>> list = bibleService.SearchWord(bibleDTO);
 		System.out.println("실행" + list);
 		return ResponseEntity.ok(list);
+	}
+	
+	@PostMapping("/likeBible")
+	public void likeBible(@RequestBody BibleLikeDTO bibleLikeDTO) {
+		bibleService.likeBible(bibleLikeDTO);
 	}
 }

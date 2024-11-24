@@ -42,7 +42,7 @@
 	<select id="getSelectedContent"
 		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
 		resultType="Map">
-		SELECT verse, content FROM bible
+		SELECT bible_id, verse, content ,like_count FROM bible
 		WHERE list = #{list}
 		AND chapter = #{chapter}
 		AND verse = #{verse}
@@ -95,4 +95,20 @@
 		FROM bible
 		WHERE content like CONCAT(#{content},'%');
 	</select>
+	
+	<insert id="likeBible" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
+		INSERT INTO biblelike(bible_id, user_id) VALUES(#{bible_id}, #{user_id});
+	</insert>
+	
+	<select id="isLike"  parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
+		select bible_id, user_id from biblelike;
+	</select>
+	
+	<delete id="likeInit" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
+		delete from biblelike where bible_id =#{bible_id} and user_id= #{user_id}
+	</delete>
+	
+	<update id="updateLike" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
+		UPDATE bible SET like_count = (SELECT COUNT(bible_id) FROM biblelike WHERE bible_id = #{bible_id}) WHERE bible_id = #{bible_id};
+	</update>
 </mapper>

@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.bible.todo.domain.bible.vo.BibleLikeVo;
 import com.bible.todo.domain.bible.vo.BibleVo;
+import com.bible.todo.domain.comments.vo.CommentLikeVo;
 
 @Mapper
 public interface BibleMapper {
@@ -37,4 +39,12 @@ public interface BibleMapper {
 	Map<String, Object>getMaxVerse(BibleVo bibleVo);
 	
 	List<Map<String, Object>>SearchWord(BibleVo bibleVo);
+	
+	void likeBible(BibleLikeVo bibleLikeVo);
+	
+	List<Map<String, Object>> isLike(BibleLikeVo bibleLikeVo);
+	
+	void likeInit(BibleLikeVo bibleLikeVo);
+	
+	void updateLike(BibleLikeVo biblelikeVo);
 }

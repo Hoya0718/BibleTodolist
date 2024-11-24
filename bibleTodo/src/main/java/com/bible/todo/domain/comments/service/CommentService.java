@@ -77,7 +77,5 @@ public class CommentService {
             }
         }
 
-        // 좋아요 수를 갱신한 후 최신 좋아요 개수 출력
-        // 여기서 updateLike를 이미 호출했으므로 별도로 호출할 필요는 없습니다.
     }
 }
