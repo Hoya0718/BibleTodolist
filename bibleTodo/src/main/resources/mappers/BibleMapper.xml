@@ -111,4 +111,5 @@
 	<update id="updateLike" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
 		UPDATE bible SET like_count = (SELECT COUNT(bible_id) FROM biblelike WHERE bible_id = #{bible_id}) WHERE bible_id = #{bible_id};
 	</update>
+	
 </mapper>

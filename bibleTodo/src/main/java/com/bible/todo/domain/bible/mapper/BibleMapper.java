@@ -47,4 +47,5 @@ public interface BibleMapper {
 	void likeInit(BibleLikeVo bibleLikeVo);
 	
 	void updateLike(BibleLikeVo biblelikeVo);
+
 }

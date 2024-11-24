@@ -10,4 +10,8 @@
 	<select id="hasCheck" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
 		select bible_id, isCheck from checkBible where user_id= #{user_id}
 	</select>
+	
+	<select id="getLastReading" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
+		SELECT list, chapter, verse FROM bible WHERE bible_id  = (SELECT bible_id FROM checkbible where user_id = #{user_id} ORDER BY lastdate DESC LIMIT 1);
+	</select>
 </mapper>

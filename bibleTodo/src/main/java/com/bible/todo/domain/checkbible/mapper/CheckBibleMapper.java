@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.bible.todo.domain.bible.vo.BibleVo;
 import com.bible.todo.domain.checkbible.vo.CheckBibleVo;
 
 @Mapper
@@ -13,4 +14,6 @@ public interface CheckBibleMapper {
 	void checkVerse(CheckBibleVo checkBibleVo);
 	
 	List<Map<String, Object>> hasCheck(CheckBibleVo checkBibleVo);
+	
+	Map<String, Object> getLastReading(CheckBibleVo checkbibleVo);
 }

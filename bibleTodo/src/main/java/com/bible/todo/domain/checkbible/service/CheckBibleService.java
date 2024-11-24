@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.bible.todo.domain.bible.dto.BibleDTO;
 import com.bible.todo.domain.bible.vo.BibleVo;
 import com.bible.todo.domain.checkbible.dto.CheckBibleDTO;
 import com.bible.todo.domain.checkbible.mapper.CheckBibleMapper;
@@ -70,4 +71,11 @@ public class CheckBibleService {
             }
         }
     }
+    public Map<String, Object> getLastReading(CheckBibleDTO checkBibleDTO){
+		CheckBibleVo checkBibleVo = new CheckBibleVo();
+		checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+		Map<String, Object> map = checkBibleMapper.getLastReading(checkBibleVo); 
+		System.out.println("서비스 반환값" + map);
+		return map;
+	}
 }
