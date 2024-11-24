@@ -16,4 +16,6 @@ public interface CheckBibleMapper {
 	List<Map<String, Object>> hasCheck(CheckBibleVo checkBibleVo);
 	
 	Map<String, Object> getLastReading(CheckBibleVo checkbibleVo);
+	
+    void updateCheckVerse(CheckBibleVo checkBibleVo);
 }

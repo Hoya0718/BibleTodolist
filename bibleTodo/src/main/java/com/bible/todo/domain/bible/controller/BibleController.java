@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bible.todo.domain.bible.dto.BibleDTO;
 import com.bible.todo.domain.bible.dto.BibleLikeDTO;
 import com.bible.todo.domain.bible.service.BibleService;
+import com.bible.todo.domain.checkbible.dto.CheckBibleDTO;
+import com.bible.todo.domain.checkbible.service.CheckBibleService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +30,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BibleController {
 	private final BibleService bibleService;
-
+	private final CheckBibleService checkBibleService;
+	
 	@GetMapping("/getTestament")
 	public ResponseEntity<List<String>> getTestament() {
 		List<String> list = bibleService.getTestament();
@@ -66,6 +70,7 @@ public class BibleController {
 
 	@PostMapping("/getSelectedContent")
 	public ResponseEntity<Map<String, Object>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
+		
 		// getSelectedContent가 null이나 빈 리스트를 반환할 수 있는지 체크
 		Map<String, Object> result = bibleService.getSelectedContent(bibleDTO);
 		// 리스트가 비어있거나 null일 경우 처리
@@ -81,7 +86,7 @@ public class BibleController {
 		result.put("maxChapter", maxChapter);
 		// 최종 결과 출력
 		System.out.println("컨텐츠 여기" + result);
-
+		
 		// 결과 반환
 		return ResponseEntity.ok(result);
 	}

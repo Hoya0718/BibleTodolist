@@ -14,4 +14,8 @@
 	<select id="getLastReading" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
 		SELECT list, chapter, verse FROM bible WHERE bible_id  = (SELECT bible_id FROM checkbible where user_id = #{user_id} ORDER BY lastdate DESC LIMIT 1);
 	</select>
+	
+	<update id="updateCheckVerse" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo">
+		UPDATE checkbible set lastdate = NOW() WHERE user_id = #{user_id} AND bible_id =#{bible_id}
+	</update>
 </mapper>

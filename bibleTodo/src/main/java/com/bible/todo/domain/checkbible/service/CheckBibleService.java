@@ -69,6 +69,12 @@ public class CheckBibleService {
                 checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
                 checkBibleMapper.checkVerse(checkBibleVo); // 구절 체크
             }
+            else {
+            
+                System.out.println("업데이트 후 새로 체크하기");
+                checkBibleVo.setBible_id(bible_id);
+                checkBibleMapper.updateCheckVerse(checkBibleVo); // 업데이트
+            }
         }
     }
     public Map<String, Object> getLastReading(CheckBibleDTO checkBibleDTO){
