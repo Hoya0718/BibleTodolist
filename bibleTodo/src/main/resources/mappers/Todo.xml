@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="getTodo" resultType="Map">
-		select id, title, status,user_id from todo
+		select id, title, status, user_id from todo
 	</select>
 	
 	<update id="updateStatus" parameterType="com.bible.todo.domain.todo.vo.TodoVo">

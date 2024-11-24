@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bible.todo.domain.comments.mapper.CommentMapper">
+<mapper
+	namespace="com.bible.todo.domain.comments.mapper.CommentMapper">
 
-	<insert id="writeComment" parameterType="com.bible.todo.domain.comments.vo.CommentVo">
-		insert into comments(comment, creation_date, user_id, bible_id) values(#{comment}, NOW(), #{user_id}, #{bible_id})
+	<insert id="writeComment"
+		parameterType="com.bible.todo.domain.comments.vo.CommentVo">
+		insert into comments(comment, creation_date, user_id,
+		bible_id) values(#{comment}, NOW(), #{user_id}, #{bible_id})
 	</insert>
-	
-	<select id="getBibleId" parameterType="com.bible.todo.domain.bible.vo.BibleVo" resultType="int">
-		select bible_id from bible where list= #{list} and chapter= #{chapter} and verse= #{verse}
+
+	<select id="getBibleId"
+		parameterType="com.bible.todo.domain.bible.vo.BibleVo"
+		resultType="int">
+		select bible_id from bible where list= #{list} and chapter=
+		#{chapter} and verse= #{verse}
+	</select>
+
+	<select id="getComment"
+		parameterType="com.bible.todo.domain.comments.vo.CommentVo"
+		resultType="Map">
+		select comment_id, comment, like_count, creation_date,
+		user_id from comments order by creation_date desc;
+	</select>
+
+	<insert id="likeUp" parameterType="com.bible.todo.domain.comments.vo.CommentLikeVo">
+		insert into commentlike(comment_id, user_id) values(#{comment_id}, #{user_id})
+	</insert>
+
+	<select id="isLike" resultType="Map">
+		SELECT comment_id, user_id FROM commentlike;
 	</select>
 	
-	<select id="getComment" parameterType="com.bible.todo.domain.comments.vo.CommentVo" resultType="Map">
-		select comment, like_count, creation_date, user_id from comments order by creation_date desc;
-	</select>
+	<delete id="likeInit" parameterType="com.bible.todo.domain.comments.vo.CommentLikeVo">
+		delete from commentlike where comment_id=#{comment_id} and user_id= #{user_id}
+	</delete>
+	
+	<update id="updateLike" parameterType="com.bible.todo.domain.comments.vo.CommentLikeVo">
+		UPDATE COMMENTS SET like_count = (SELECT COUNT(comment_id) FROM commentlike WHERE comment_id = #{comment_id}) WHERE comment_id = #{comment_id};
+	</update>
 </mapper>

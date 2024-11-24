@@ -27,9 +27,15 @@ public class CommentController {
 	    	commentService.writeComment(commentDTO);
 	    }
 	 
-	 @GetMapping("getComment")
+	 @GetMapping("/getComment")
 	 public ResponseEntity<List<Map<String, Object>>> getComment(){
 		 List<Map<String, Object>> list = commentService.getComment();
 		 return ResponseEntity.ok(list);
 	 }
+	 
+	 @PostMapping("/likeUp")
+	 public void likeUp(@RequestBody CommentDTO commentDTO) {
+		 commentService.likeUp(commentDTO);
+	 }
+	 
 }
