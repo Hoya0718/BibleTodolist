@@ -116,4 +116,10 @@
 		select LIST, chapter, verse, content from bible where bible_id IN (SELECT bible_id from biblelike WHERE user_id= #{user_id});
 	</select>
 	
+	  <select id="todayBible" resultType="Map">
+        SELECT list, chapter, verse, content FROM bible
+     	WHERE MOD(ABS(UNIX_TIMESTAMP(CURRENT_DATE) + DAYOFYEAR(CURRENT_DATE)), (SELECT COUNT(*) FROM bible)) = bible_id % (SELECT COUNT(*) FROM bible)
+        LIMIT 1;
+    </select>
+	
 </mapper>

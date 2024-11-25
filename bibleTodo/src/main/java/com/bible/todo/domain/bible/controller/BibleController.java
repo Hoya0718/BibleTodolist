@@ -134,4 +134,11 @@ public class BibleController {
 		List<Map<String, Object>> list = bibleService.getMyLoveBible(bibleLikeDTO);
 		return ResponseEntity.ok(list);
 	}
+	
+	@GetMapping("/todayBible")
+	public ResponseEntity<Map<String, Object>> todayBible() {
+		Map<String, Object> map = bibleService.todayBible();
+		System.out.println(map);
+		return ResponseEntity.ok(map);
+	}
 }

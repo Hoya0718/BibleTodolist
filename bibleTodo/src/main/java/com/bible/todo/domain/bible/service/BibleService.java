@@ -146,6 +146,10 @@ public class BibleService {
 		BibleLikeVo bibleLikeVo = new BibleLikeVo();
 		bibleLikeVo.setUser_id(bibleLikeDTO.getUser_id());
 		return bibleMapper.getMyLoveBible(bibleLikeVo);
-		 
 	}
+	
+	public Map<String, Object> todayBible() {
+		return bibleMapper.todayBible();
+	}
+	
 }
