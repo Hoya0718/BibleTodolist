@@ -18,4 +18,13 @@
 	<update id="updateCheckVerse" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo">
 		UPDATE checkbible set lastdate = NOW() WHERE user_id = #{user_id} AND bible_id =#{bible_id}
 	</update>
+	
+	<select id="totalReading" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
+		SELECT count(isCheck) as count FROM checkbible where user_id= #{user_id};
+	</select>
+	
+	<select id="totalProgress" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
+		SELECT (COUNT(CASE WHEN isCheck = 1 THEN 1 END) * 100.0) / 31089 AS progress_bar FROM checkBible WHERE user_id= #{user_id};
+	</select>
+	
 </mapper>

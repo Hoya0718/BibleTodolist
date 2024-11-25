@@ -40,4 +40,18 @@ public class CheckBibleController {
 		}
 		return ResponseEntity.ok(map);
 	}
+	
+	@PostMapping("/totalReading")
+	public ResponseEntity<Map<String,Object>> totalReading(@RequestBody CheckBibleDTO checkBibleDTO){
+		Map<String, Object> map = checkBibleService.totalReading(checkBibleDTO);
+		System.out.println("카운트" + map);
+		return ResponseEntity.ok(map);
+	}
+	
+	@PostMapping("/totalProgress")
+	public ResponseEntity<Map<String,Object>> totalProgress(@RequestBody CheckBibleDTO checkBibleDTO){
+		Map<String, Object> map = checkBibleService.totalProgress(checkBibleDTO);
+		System.out.println("프로그래스" + map);
+		return ResponseEntity.ok(map);
+	}
 }

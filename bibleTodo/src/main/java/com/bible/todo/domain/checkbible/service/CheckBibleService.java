@@ -1,11 +1,12 @@
 package com.bible.todo.domain.checkbible.service;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.bible.todo.domain.bible.dto.BibleDTO;
 import com.bible.todo.domain.bible.vo.BibleVo;
 import com.bible.todo.domain.checkbible.dto.CheckBibleDTO;
 import com.bible.todo.domain.checkbible.mapper.CheckBibleMapper;
@@ -84,4 +85,40 @@ public class CheckBibleService {
 		System.out.println("서비스 반환값" + map);
 		return map;
 	}
+    
+    public Map<String, Object> totalReading(CheckBibleDTO checkBibleDTO) {
+    	CheckBibleVo checkBibleVo = new CheckBibleVo();
+    	checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+    	return checkBibleMapper.totalReading(checkBibleVo);
+    	}
+    
+    public Map<String, Object> totalProgress(CheckBibleDTO checkBibleDTO) {
+        // CheckBibleVo 생성 후 user_id 설정
+        CheckBibleVo checkBibleVo = new CheckBibleVo();
+        checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+        
+        // checkBibleMapper 호출하여 Map 반환
+        Map<String, Object> map = checkBibleMapper.totalProgress(checkBibleVo);
+        
+        // progress_bar 값 가져오기 (BigDecimal로 반환된 경우)
+        if (map.containsKey("progress_bar")) {
+            Object progressBarObj = map.get("progress_bar");
+            
+            if (progressBarObj instanceof BigDecimal) {
+                BigDecimal progressBar = (BigDecimal) progressBarObj;
+                
+                // BigDecimal을 Double로 변환
+                Double progressValue = progressBar.doubleValue();
+                
+                // DecimalFormat을 사용하여 소수점 2자리로 포맷
+                DecimalFormat df = new DecimalFormat("#.##");
+                String formattedProgress = df.format(progressValue); // 포맷된 값 (문자열)
+                
+                // 포맷된 값을 다시 Map에 저장
+                map.put("progress_bar", formattedProgress);
+            }
+        }
+        
+        return map;
+    }
 }

@@ -18,4 +18,8 @@ public interface CheckBibleMapper {
 	Map<String, Object> getLastReading(CheckBibleVo checkbibleVo);
 	
     void updateCheckVerse(CheckBibleVo checkBibleVo);
+    
+    Map<String, Object> totalReading(CheckBibleVo checkBibleVo);
+    
+    Map<String, Object> totalProgress(CheckBibleVo checkBibleVo);
 }
