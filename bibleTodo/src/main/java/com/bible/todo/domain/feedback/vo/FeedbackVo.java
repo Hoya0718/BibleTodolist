@@ -9,6 +9,6 @@ public class FeedbackVo {
 	private int id;
 	private String user_id;
 	private String title;
-	private String suggestion;
+	private String suggest;
 	private Date feedback_date;
 }

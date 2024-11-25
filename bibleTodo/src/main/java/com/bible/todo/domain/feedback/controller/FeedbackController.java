@@ -33,4 +33,11 @@ public class FeedbackController {
 	public void postSuggest(@RequestBody FeedbackDTO feedbackDTO) {
 		feedbackService.postSuggest(feedbackDTO);
 	}
+	
+	@PostMapping("/getMyFeedback")
+	public ResponseEntity<List<Map<String, Object>>> getMyFeedback(@RequestBody FeedbackDTO feedbackDTO) {
+		List<Map<String, Object>> list = feedbackService.getMyFeedback(feedbackDTO);
+		System.out.println("실행"+ list);
+		return ResponseEntity.ok(list);
+	}
 }

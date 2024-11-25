@@ -26,8 +26,15 @@ public class FeedbackService{
 		FeedbackVo feedbackVo = new FeedbackVo();
 		feedbackVo.setUser_id(feedbackDTO.getUser_id());
 		feedbackVo.setTitle(feedbackDTO.getTitle());
-		feedbackVo.setSuggestion(feedbackDTO.getSuggestion());
+		feedbackVo.setSuggest(feedbackDTO.getSuggest());
 		
 		feedbackMapper.postSuggest(feedbackVo);
+	}
+	
+	public List<Map<String, Object>> getMyFeedback(FeedbackDTO feedbackDTO) {
+		FeedbackVo feedbackVo = new FeedbackVo();
+		feedbackVo.setUser_id(feedbackDTO.getUser_id());
+		
+		return feedbackMapper.getMyFeedback(feedbackVo);
 	}
 }

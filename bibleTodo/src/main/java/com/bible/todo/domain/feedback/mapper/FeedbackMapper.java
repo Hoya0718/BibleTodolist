@@ -12,5 +12,7 @@ public interface FeedbackMapper {
 	List<Map<String, Object>> getSuggestionList();
 	
 	void postSuggest(FeedbackVo feedbackVo);
+	
+	List<Map<String, Object>> getMyFeedback(FeedbackVo feedbackVo);
 }
 

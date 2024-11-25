@@ -6,5 +6,5 @@ import lombok.Data;
 public class FeedbackDTO {
 	private String user_id;
 	private String title;
-	private String suggestion;
+	private String suggest;
 }

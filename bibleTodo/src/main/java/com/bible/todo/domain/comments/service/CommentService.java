@@ -76,6 +76,19 @@ public class CommentService {
                 commentMapper.updateLike(commentLikeVo); // 좋아요 수 업데이트
             }
         }
-
+    }
+    public List<Map<String, Object>> getMyComment(CommentDTO commentDTO){
+    	CommentVo commentVo = new CommentVo();
+    	commentVo.setUser_id(commentDTO.getUser_id());
+    	return commentMapper.getMyComment(commentVo);
+    }
+    
+    public List<Map<String, Object>> myLoveComment(CommentDTO commentDTO){
+    	CommentLikeVo commentLikeVo = new CommentLikeVo();
+    	commentLikeVo.setUser_id(commentDTO.getUser_id());
+    	return commentMapper.myLoveComment(commentLikeVo);
     }
 }
+
+
+

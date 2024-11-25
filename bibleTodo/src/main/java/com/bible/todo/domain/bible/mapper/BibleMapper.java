@@ -48,4 +48,5 @@ public interface BibleMapper {
 	
 	void updateLike(BibleLikeVo biblelikeVo);
 
+	List<Map<String, Object>> getMyLoveBible(BibleLikeVo biblelikeVo);
 }

@@ -4,10 +4,15 @@
 
 <mapper namespace="com.bible.todo.domain.feedback.mapper.FeedbackMapper">
 	<select id="getSuggestionList" parameterType="com.bible.todo.domain.feedback.mapper.FeedbackMapper">
-		select id, user_id, title, feedback_date from feedback;
+		select id, user_id, title, feedback_date, suggest from feedback;
 	</select>
 	
 	<insert id="postSuggest" parameterType="com.bible.todo.domain.feedback.mapper.FeedbackMapper">
-		INSERT INTO feedback(user_id, title, suggestion) VALUES(#{user_id},#{title},#{suggestion});
+		INSERT INTO feedback(user_id, title, suggest) VALUES(#{user_id},#{title},#{suggest});
 	</insert>
+	
+	<select id="getMyFeedback" parameterType="com.bible.todo.domain.feedback.mapper.FeedbackMapper" resultType="Map">
+		select title, suggest, feedback_date from feedback where user_id =#{user_id}
+	</select>
+	
 </mapper>

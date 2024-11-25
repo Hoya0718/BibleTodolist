@@ -24,5 +24,9 @@ public interface CommentMapper {
 	
 	void likeInit(CommentLikeVo commentLikeVo);
 	
-	void updateLike(CommentLikeVo commentlikeVo);
+	void updateLike(CommentLikeVo commentLikeVo);
+	
+	List<Map<String, Object>> myLoveComment(CommentLikeVo commentLikeVo);
+	
+	List<Map<String, Object>> getMyComment(CommentVo commentVo);
 }

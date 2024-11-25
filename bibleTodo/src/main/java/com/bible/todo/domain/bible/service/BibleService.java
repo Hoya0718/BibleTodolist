@@ -142,4 +142,10 @@ public class BibleService {
             }
         }
 	}
+	public List<Map<String, Object>> getMyLoveBible(BibleLikeDTO bibleLikeDTO){
+		BibleLikeVo bibleLikeVo = new BibleLikeVo();
+		bibleLikeVo.setUser_id(bibleLikeDTO.getUser_id());
+		return bibleMapper.getMyLoveBible(bibleLikeVo);
+		 
+	}
 }

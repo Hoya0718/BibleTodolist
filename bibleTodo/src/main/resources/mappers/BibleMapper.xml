@@ -112,4 +112,8 @@
 		UPDATE bible SET like_count = (SELECT COUNT(bible_id) FROM biblelike WHERE bible_id = #{bible_id}) WHERE bible_id = #{bible_id};
 	</update>
 	
+	<select id="getMyLoveBible" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo" resultType="Map">
+		select LIST, chapter, verse, content from bible where bible_id IN (SELECT bible_id from biblelike WHERE user_id= #{user_id});
+	</select>
+	
 </mapper>

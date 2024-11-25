@@ -39,4 +39,12 @@
 	<update id="updateLike" parameterType="com.bible.todo.domain.comments.vo.CommentLikeVo">
 		UPDATE COMMENTS SET like_count = (SELECT COUNT(comment_id) FROM commentlike WHERE comment_id = #{comment_id}) WHERE comment_id = #{comment_id};
 	</update>
+	
+	<select id="myLoveComment" parameterType="com.bible.todo.domain.comments.vo.CommentLikeVo" resultType="Map">
+		select comment, creation_date from comments where comment_id IN (SELECT comment_id from commentlike WHERE user_id= #{user_id});
+	</select>
+	
+	<select id="getMyComment" parameterType="com.bible.todo.domain.comments.vo.CommentVo" resultType="Map">
+		select comment, like_count, creation_date from comments WHERE user_id= #{user_id}
+	</select>
 </mapper>

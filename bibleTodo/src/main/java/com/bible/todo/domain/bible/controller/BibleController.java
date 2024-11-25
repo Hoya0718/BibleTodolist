@@ -128,4 +128,10 @@ public class BibleController {
 	public void likeBible(@RequestBody BibleLikeDTO bibleLikeDTO) {
 		bibleService.likeBible(bibleLikeDTO);
 	}
+	
+	@PostMapping("/getMyLoveBible")
+	public ResponseEntity<List<Map<String, Object>>> getMyLoveBible(@RequestBody BibleLikeDTO bibleLikeDTO){
+		List<Map<String, Object>> list = bibleService.getMyLoveBible(bibleLikeDTO);
+		return ResponseEntity.ok(list);
+	}
 }

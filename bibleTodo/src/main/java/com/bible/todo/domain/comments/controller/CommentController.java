@@ -38,4 +38,15 @@ public class CommentController {
 		 commentService.likeUp(commentDTO);
 	 }
 	 
+	 @PostMapping("/myLoveComment")
+	 public ResponseEntity<List<Map<String, Object>>> myLoveComment(@RequestBody CommentDTO commentDTO){
+		 List<Map<String, Object>> list = commentService.myLoveComment(commentDTO);
+		 return ResponseEntity.ok(list);
+	 }
+	 
+	 @PostMapping("/getMyComment")
+	 public ResponseEntity<List<Map<String, Object>>> getMyComment(@RequestBody CommentDTO commentDTO){
+		 List<Map<String, Object>> list = commentService.getMyComment(commentDTO);
+		 return ResponseEntity.ok(list);
+	 }
 }
