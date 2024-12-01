@@ -1,6 +1,7 @@
 package com.bible.todo.domain.checkbible.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,12 @@ public class CheckBibleController {
 	@PostMapping("/totalProgress")
 	public ResponseEntity<Map<String,Object>> totalProgress(@RequestBody CheckBibleDTO checkBibleDTO){
 		Map<String, Object> map = checkBibleService.totalProgress(checkBibleDTO);
-		System.out.println("프로그래스" + map);
 		return ResponseEntity.ok(map);
+	}
+	
+	@PostMapping("bible/checkBible")
+	public ResponseEntity<List<Double>> checkListBible(@RequestBody CheckBibleDTO checkBibleDTO){
+		List<Double> list = checkBibleService.checkListBible(checkBibleDTO);
+		return ResponseEntity.ok(list);
 	}
 }

@@ -2,6 +2,7 @@ package com.bible.todo.domain.checkbible.service;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,6 @@ public class CheckBibleService {
         bibleVo.setList(checkBibleDTO.getList());
         bibleVo.setChapter(checkBibleDTO.getChapter());
         bibleVo.setVerse(checkBibleDTO.getVerse());
-
         // bible_id 가져오기
         int bible_id = commentMapper.getBibleId(bibleVo); // 해당 bible_id를 가져와 bible_id에 넣었음
 
@@ -40,7 +40,7 @@ public class CheckBibleService {
         // 사용자에 대한 체크 여부 정보를 담을 객체 생성
         CheckBibleVo checkBibleVo = new CheckBibleVo();
         checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
-
+     
         // 사용자의 bible_id와 읽음 유무 정보 가져오기
         List<Map<String, Object>> list = checkBibleMapper.hasCheck(checkBibleVo); // 해당 사용자의 bible_id와 읽음 유무
         System.out.println("hasCheck 실행, " + list + " list크기: " + list.size());
@@ -50,7 +50,9 @@ public class CheckBibleService {
             System.out.println("하나도 없어서 실행");
             checkBibleVo.setBible_id(bible_id);
             checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+            checkBibleVo.setList(checkBibleDTO.getList());
             checkBibleMapper.checkVerse(checkBibleVo); // 구절 체크
+   
         } else {
             boolean isAlreadyChecked = false;
 
@@ -68,6 +70,7 @@ public class CheckBibleService {
                 System.out.println("존재 안 해서 실행");
                 checkBibleVo.setBible_id(bible_id);
                 checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+                checkBibleVo.setList(checkBibleDTO.getList());
                 checkBibleMapper.checkVerse(checkBibleVo); // 구절 체크
             }
             else {
@@ -120,5 +123,20 @@ public class CheckBibleService {
         }
         
         return map;
+    }
+    
+    public List<Double> checkListBible(CheckBibleDTO checkBibleDTO){
+    	List<Double> list = new ArrayList<>();
+    	CheckBibleVo checkBibleVo = new CheckBibleVo();
+    	
+    	for(String getList : checkBibleDTO.getLists()) {
+    		checkBibleVo.setList(getList);
+    		checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
+    		
+    		List<Double> result = checkBibleMapper.checkListBible(checkBibleVo);
+    		list.addAll(result);
+    		System.out.println(result);
+    	}
+    	return list;
     }
 }

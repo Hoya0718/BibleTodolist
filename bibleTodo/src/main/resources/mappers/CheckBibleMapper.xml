@@ -4,7 +4,7 @@
 <mapper namespace="com.bible.todo.domain.checkbible.mapper.CheckBibleMapper">
 
 	<insert id="checkVerse" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo">	
-		insert into checkbible(user_id, bible_id, isCheck, lastdate) values(#{user_id},#{bible_id},1,NOW())
+		insert into checkbible(user_id, bible_id, isCheck, lastdate, list) values(#{user_id},#{bible_id},1,NOW(), #{list})
 	</insert>
 	
 	<select id="hasCheck" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
@@ -27,4 +27,7 @@
 		SELECT (COUNT(CASE WHEN isCheck = 1 THEN 1 END) * 100.0) / 31089 AS progress_bar FROM checkBible WHERE user_id= #{user_id};
 	</select>
 	
+	<select id="checkListBible" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Double">
+		SELECT truncate((COUNT(CASE WHEN LIST= #{list} and isCheck = 1 THEN 1 END) * 100.0) / (SELECT COUNT(*) FROM bible WHERE LIST= #{list}),2) AS progress_bar FROM checkBible WHERE user_id= #{user_id};
+	</select>
 </mapper>

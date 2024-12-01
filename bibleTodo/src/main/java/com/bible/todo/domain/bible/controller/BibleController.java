@@ -40,6 +40,7 @@ public class BibleController {
 
 	@PostMapping("/getBibleTestament")
 	public ResponseEntity<List<String>> getBibleTestament(@RequestBody BibleDTO bibleDTO) {
+		System.out.println("실행했다" +  bibleDTO);
 		List<String> list = new ArrayList<>();
 		list = bibleService.getTestamentList(bibleDTO.getTestament());
 		return ResponseEntity.ok(list);

@@ -11,5 +11,5 @@ public class CheckBibleVo {
 	private int bible_id;
 	private Boolean isCheck;
 	private Date lastdate;
-
+	private String list;
 }

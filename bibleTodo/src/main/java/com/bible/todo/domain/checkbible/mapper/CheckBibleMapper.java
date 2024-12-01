@@ -22,4 +22,6 @@ public interface CheckBibleMapper {
     Map<String, Object> totalReading(CheckBibleVo checkBibleVo);
     
     Map<String, Object> totalProgress(CheckBibleVo checkBibleVo);
+    
+    List<Double> checkListBible(CheckBibleVo checkBibleVo);
 }
