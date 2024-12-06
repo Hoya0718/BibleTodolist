@@ -1,115 +1,49 @@
-/*package com.bible.todo.config;
+package com.bible.todo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import com.bible.todo.domain.oauth2.handler.CustomOAuth2SuccessHandler;
+import com.bible.todo.domain.oauth2.service.CustomOAuth2UserService;
 
 @Configuration
-@Log4j2
-@EnableWebSecurity //시큐리티 활성화
-@RequiredArgsConstructor
 public class CustomSecurityConfig {
-	
-	//private final CustomOauth2UserService customOAuth2UserService;
-	
-	//계층 권한
-	//@Bean
-	//public RoleHierarchy roleHierarchy() {
 
-	//return RoleHierarchyImpl.fromHierarchy("""
-	//		ROLE_C > ROLE_B
-	//		ROLE_B > ROLE_A
-	//		""");
-	//}
-	//
-	//@Bean RoleHierarchy roleHierarchy() {
-		
-	//	return RoleHierarchyImpl.withDefaultRolePrefix()
-	//			.role("C").implies("B")
-	//			.role("B").implies("A")
-	//			.build();
-	//}
+	private final CustomOAuth2UserService customOAuth2UserService;
+	private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
 	
-    @Bean
+	public CustomSecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomOAuth2SuccessHandler customOAuth2SuccessHandler) {
+		this.customOAuth2UserService = customOAuth2UserService;
+		this.customOAuth2SuccessHandler = customOAuth2SuccessHandler;
+	}
+
+	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-        log.info("---------- Security Configuration Started ----------");
+        // CSRF 보호 비활성화 (API 기반 앱일 경우 유용)
+        http.csrf(csrf -> csrf.disable());
 
-//        http
-//    	.oauth2Login((oauth2) -> oauth2
-//    		.userInfoEndpoint((userInfoEndPointConfig) -> //데이터를 받을 수 있는 유저 디테일 서비스
-//    			userInfoEndPointConfig.userService(customOAuth2UserService)
-//    		)
-//    	);
-        
-        http
-    	.csrf((auth) ->
-    		auth
-    			.ignoringRequestMatchers("/joinProc")
-    			.disable()
-    	);
-        
-        http
-        	.authorizeHttpRequests((auth) ->
-        		auth
-        		.anyRequest().permitAll());
-        			//.requestMatchers("/template/**","/static/**", "/", "/static/index","/static/index.html", "/login", "/join", "/joinProc", "/oauth2/**").permitAll()
-        			//.requestMatchers("/admin.html").hasRole("ADMIN")
-        			//.requestMatchers("/static/**", "/", "index", "index.html").hasAnyRole("ADMIN", "USER")
-        			//.anyRequest().authenticated()
-        		);
-        
-        http
-        	.formLogin((auth) -> //로그인이 필요할 떄 로그인 사이트로 이동 가능하게
-        		auth
-        			.loginPage("/login") //사용자 정의 로그인 페이지
-        			.loginProcessingUrl("/loginProc") //로그인 프로세싱 URL 로그인 페이지의 action
-        			.permitAll()
-        		);
-        //http
-        //	.httpBasic(Customizer.withDefaults()); //팝업 로그인 방식
-        http
-        	.sessionManagement((auth) -> 
-        		auth
-        			.maximumSessions(1) //
-        			.maxSessionsPreventsLogin(true) //최대 로그인 허용치 초과 시 true-> 새로운 로그인 차단, false -> 기존 세션 하나 삭제
-        	
-        			);
-        http
-        	.sessionManagement((auth) ->
-        		auth
-        			.sessionFixation()
-        				//.none() //로그인 시 세션 정보 변경 안함
-        				//.newSession() //로그인 시 세션 새로 생성
-        				.changeSessionId() // 로그인 시 동일한 세션에 대한 id 변경
-        			);
-        
-        http
-        	.logout((auth) ->
-        		auth
-        			.logoutUrl("/logout")
-        			.logoutSuccessUrl("/")
-        			);
-        
-        log.info("---------- Security Configuration Complete ----------");
+        // 모든 요청에 대해 인증 없이 접근 허용
+        http.authorizeHttpRequests(auth -> auth
+            .anyRequest().permitAll()  // 모든 요청에 대해 인증 없이 접근 허용
+            
+        );
 
-        return http.build();
-    }
+        // OAuth2 로그인 처리
+        http.oauth2Login(oauth2 -> oauth2 //OAuth2Login 시작
+            .userInfoEndpoint(userInfoEndpointConfig ->  // OAuth2Login 성공 이후 설정을 시작
+                userInfoEndpointConfig.userService(customOAuth2UserService))  // customOAuth2UserService에서 처리하겠다.
+            .successHandler(customOAuth2SuccessHandler)
+           );
 
-    @Bean //어느곳이든 호출 가능
-    public BCryptPasswordEncoder bCryptPasswordEncoder() { //메서드 호출 시 BCryptPasswordEncoder() 생성
-        // 비밀번호 암호화 방식 설정
-        return new BCryptPasswordEncoder();
+        // 세션 관리 설정 (동시 세션 수 제한)
+        http.sessionManagement(session -> session
+            .maximumSessions(1)  // 동시에 한 개의 세션만 허용
+            .maxSessionsPreventsLogin(true)  // 이미 세션이 있을 경우 추가 로그인 방지
+        );
+
+        return http.build();  // HttpSecurity 객체를 사용해 SecurityFilterChain 빌드
     }
 }
-*/

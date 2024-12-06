@@ -27,18 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class JoinController {
 	private final JoinService joinService;
 	
-	@GetMapping("/join")
-	public String joinP() {
-		return "join";
-	}
-	
-	@GetMapping("/exam")
-	public Map<String, String> exam() {
-		Map<String, String> map = new HashMap<>();
-		map.put("message", "Hello World");
-		return map;
-	}
-	
 	@PostMapping("/joinProc")
 	public ResponseEntity<Map<String, String>> joinProcess(@RequestBody JoinDTO joinDTO,BindingResult result) {
 	

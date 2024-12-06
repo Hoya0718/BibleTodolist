@@ -1,5 +1,6 @@
 package com.bible.todo.domain.login.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -32,7 +33,14 @@ public class LoginController {
 	public ResponseEntity<Map<String,Object>> loginProc(@RequestBody LoginDTO loginDTO) {
 		Map<String, Object> map = loginService.LoginProc(loginDTO);
 		return ResponseEntity.ok(map);
-		
+	}
+	@PostMapping("/oauth2/user")
+	public ResponseEntity<Map<String,Object>> oAuth2LoginProc(@RequestBody LoginDTO loginDTO) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_id", loginDTO.getUser_id());
+		map.put("user_role", "ROLE_USER");
+		return ResponseEntity.ok(map);
+	}
 //		if(response.get(user_id) == null) {
 //			System.out.println("아이디가/비밀번호가 틀리거나 존재하지 않습니다.");
 //			response.put("message", "아이디가/비밀번호가 틀리거나 존재하지 않습니다.");
@@ -41,7 +49,6 @@ public class LoginController {
 //		session.setAttribute("userId", getId);
 //		 response.put("message", "success");
 //		 return ResponseEntity.ok(response);  // 로그인 성공 응답
-	}
 	
 	@PostMapping("logoutProc")
 	public String logoutProc(HttpSession session) {

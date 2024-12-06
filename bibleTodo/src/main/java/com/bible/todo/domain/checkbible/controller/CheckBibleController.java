@@ -45,7 +45,6 @@ public class CheckBibleController {
 	@PostMapping("/totalReading")
 	public ResponseEntity<Map<String,Object>> totalReading(@RequestBody CheckBibleDTO checkBibleDTO){
 		Map<String, Object> map = checkBibleService.totalReading(checkBibleDTO);
-		System.out.println("카운트" + map);
 		return ResponseEntity.ok(map);
 	}
 	

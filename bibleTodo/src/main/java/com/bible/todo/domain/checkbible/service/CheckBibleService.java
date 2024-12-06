@@ -135,7 +135,6 @@ public class CheckBibleService {
     		
     		List<Double> result = checkBibleMapper.checkListBible(checkBibleVo);
     		list.addAll(result);
-    		System.out.println(result);
     	}
     	return list;
     }

@@ -1,4 +1,4 @@
-package com.bible.todo.domain.oauth2;
+package com.bible.todo.domain.oauth2.dto;
 
 import java.util.Map;
 
@@ -29,4 +29,9 @@ public class GoogleResponse implements OAuth2Response{
 	public String getName() {
 		return attribute.get("name").toString();
 	}
+	
+	@Override
+    public Map<String, Object> getAttributes() {
+        return attribute;  // 실제 Kakao 응답 속성 반환
+    }
 }
