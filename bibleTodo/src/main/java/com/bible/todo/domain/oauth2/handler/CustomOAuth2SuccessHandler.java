@@ -20,12 +20,10 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         // 로그인 성공한 사용자 정보 (예: 사용자 이름, 이메일, 아이디 등)
         String userName = oAuth2User.getName();
-        System.out.println("UserName을 가져와"+userName);
         String userId = (String) oAuth2User.getAttributes().get("email");  // 예시로 'sub' 속성을 사용
         
         // 로그인 후, URL에 사용자 정보를 포함하여 리디렉션
         String redirectUrl = "http://localhost:3000/OAuth2Callback?userId=" + userId;
-        System.out.println("리다이렉트 유알엘" + redirectUrl);
         response.sendRedirect(redirectUrl);
     }
 }
