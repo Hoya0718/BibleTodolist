@@ -8,7 +8,7 @@ build/
 ### STS ###
 config-properties
 src/main/resources/config.properties
-
+src/main/resources/application.properties
 .apt_generated
 .classpath
 .factorypath
