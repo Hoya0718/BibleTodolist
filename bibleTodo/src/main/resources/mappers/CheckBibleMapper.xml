@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="hasCheck" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
-		select bible_id, isCheck from checkBible where user_id= #{user_id}
+		select bible_id, isCheck from checkbible where user_id= #{user_id}
 	</select>
 	
 	<select id="getLastReading" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
@@ -24,10 +24,10 @@
 	</select>
 	
 	<select id="totalProgress" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Map">
-		SELECT (COUNT(CASE WHEN isCheck = 1 THEN 1 END) * 100.0) / 31089 AS progress_bar FROM checkBible WHERE user_id= #{user_id};
+		SELECT (COUNT(CASE WHEN isCheck = 1 THEN 1 END) * 100.0) / 31089 AS progress_bar FROM checkbible WHERE user_id= #{user_id};
 	</select>
 	
 	<select id="checkListBible" parameterType="com.bible.todo.domain.checkbible.vo.CheckBibleVo" resultType="Double">
-		SELECT truncate((COUNT(CASE WHEN LIST= #{list} and isCheck = 1 THEN 1 END) * 100.0) / (SELECT COUNT(*) FROM bible WHERE LIST= #{list}),2) AS progress_bar FROM checkBible WHERE user_id= #{user_id};
+		SELECT truncate((COUNT(CASE WHEN LIST= #{list} and isCheck = 1 THEN 1 END) * 100.0) / (SELECT COUNT(*) FROM bible WHERE LIST= #{list}),2) AS progress_bar FROM checkbible WHERE user_id= #{user_id};
 	</select>
 </mapper>

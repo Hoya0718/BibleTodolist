@@ -52,7 +52,6 @@ public class LoginController {
 	
 	@PostMapping("logoutProc")
 	public String logoutProc(HttpSession session) {
-			System.out.println("로그아웃 전 세션" + session.getAttribute("userId"));
 			session.invalidate();
 
 			return "login";

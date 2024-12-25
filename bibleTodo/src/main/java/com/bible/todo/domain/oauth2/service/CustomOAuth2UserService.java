@@ -34,14 +34,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         // OAuth2Response 데이터를 받을 바구니
         OAuth2Response oAuth2Response = null;
         if (registrationId.equals("google")) {
-            System.out.println("구글 로그인 실행");
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         } else if (registrationId.equals("naver")) {
-            System.out.println("네이버 로그인 실행");
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
-            System.out.println("네이버 oAuth2Response" + oAuth2Response);
         } else if (registrationId.equals("kakao")) {
-            System.out.println("카카오 로그인 실행");
             oAuth2Response = new KakaoResponse(oAuth2User.getAttributes());
         }
 
@@ -52,11 +48,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
         UserVo existData = userMapper.findByUsername(username);
-        System.out.println("우저네임" + username);
-        System.out.println("이지스트 네임" + existData);
         
         if (existData == null) {
-        	System.out.println("이게 실행되겠지 ㅋ");
             UserVo userVo = new UserVo();
             userVo.setUser_name(username);
             userVo.setUser_id(oAuth2Response.getEmail());

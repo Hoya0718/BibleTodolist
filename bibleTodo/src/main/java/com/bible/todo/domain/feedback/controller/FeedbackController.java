@@ -23,9 +23,7 @@ public class FeedbackController {
 	
 	@GetMapping("/getSuggestionList")
 	public ResponseEntity<List<Map<String, Object>>> getSuggestionList (){
-		System.out.println("실행");
 		List<Map<String, Object>> list = feedbackService.getSuggestionList();
-		System.out.println("값" + list);
 		return ResponseEntity.ok(list);
 	}
 	
@@ -37,7 +35,6 @@ public class FeedbackController {
 	@PostMapping("/getMyFeedback")
 	public ResponseEntity<List<Map<String, Object>>> getMyFeedback(@RequestBody FeedbackDTO feedbackDTO) {
 		List<Map<String, Object>> list = feedbackService.getMyFeedback(feedbackDTO);
-		System.out.println("실행"+ list);
 		return ResponseEntity.ok(list);
 	}
 }

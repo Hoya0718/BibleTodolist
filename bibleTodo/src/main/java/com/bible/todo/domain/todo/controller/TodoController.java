@@ -35,7 +35,6 @@ public class TodoController {
 	
 	@PatchMapping("updateStatus")
 	public void updateStatus(@RequestBody TodoDTO todoDTO) {
-		System.out.println(todoDTO);
 		todoService.updateStatus(todoDTO);
 	}
 }

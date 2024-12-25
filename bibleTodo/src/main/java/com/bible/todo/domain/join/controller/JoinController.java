@@ -33,7 +33,6 @@ public class JoinController {
 		Map<String, String> response = new HashMap<>();
 
 		if(result.hasErrors()) {
-			System.err.println("회원가입 실패했습니다.");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);  // 회워가입 실패 응답
 		}
 		joinService.joinProcess(joinDTO);

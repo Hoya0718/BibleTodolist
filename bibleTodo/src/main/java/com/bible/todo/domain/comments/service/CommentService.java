@@ -24,7 +24,6 @@ public class CommentService {
         bibleVo.setList(commentDTO.getList());
         bibleVo.setChapter(commentDTO.getChapter());
         bibleVo.setVerse(commentDTO.getVerse());
-        System.out.println("서비스" + bibleVo);
         int bible_id = commentMapper.getBibleId(bibleVo);
 
         CommentVo commentVo = new CommentVo();
@@ -51,10 +50,8 @@ public class CommentService {
 
         // 좋아요가 없다면 새로 좋아요 추가
         if (list.isEmpty()) {
-            System.out.println("좋아요 추가");
             commentMapper.likeUp(commentLikeVo); // 좋아요 추가
             commentLikeVo.setComment_id(commentDTO.getComment_id());
-            System.out.println(commentLikeVo.getComment_id()+"추가1");
             commentMapper.updateLike(commentLikeVo); // 좋아요 수 업데이트
         } else {
             // 이미 좋아요를 눌렀다면 좋아요 취소
@@ -63,15 +60,11 @@ public class CommentService {
                                    entry.get("comment_id").equals(commentDTO.getComment_id()));
 
             if (isLiked) {
-                System.out.println("좋아요 취소");
                 commentMapper.likeInit(commentLikeVo);  // 좋아요 초기화
                 commentMapper.updateLike(commentLikeVo); // 좋아요 수 업데이트
-                System.out.println(commentLikeVo.getComment_id()+"제거");
             } else {
                 // 좋아요를 처음 누른 경우
-                System.out.println("좋아요 추가");
                 commentLikeVo.setComment_id(commentDTO.getComment_id());
-                System.out.println(commentLikeVo.getComment_id()+"추가");
                 commentMapper.likeUp(commentLikeVo);   // 좋아요 추가
                 commentMapper.updateLike(commentLikeVo); // 좋아요 수 업데이트
             }

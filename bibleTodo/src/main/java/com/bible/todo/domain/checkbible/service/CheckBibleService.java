@@ -43,11 +43,9 @@ public class CheckBibleService {
      
         // 사용자의 bible_id와 읽음 유무 정보 가져오기
         List<Map<String, Object>> list = checkBibleMapper.hasCheck(checkBibleVo); // 해당 사용자의 bible_id와 읽음 유무
-        System.out.println("hasCheck 실행, " + list + " list크기: " + list.size());
 
         // 만약 리스트가 비어 있으면, 즉 처음 체크하는 경우
         if (list.isEmpty()) {
-            System.out.println("하나도 없어서 실행");
             checkBibleVo.setBible_id(bible_id);
             checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
             checkBibleVo.setList(checkBibleDTO.getList());
@@ -59,7 +57,6 @@ public class CheckBibleService {
             // 리스트에서 bible_id가 존재하는지 확인
             for (Map<String, Object> map : list) {
                 if (map.containsKey("bible_id") && map.get("bible_id").equals(bible_id)) {
-                    System.out.println("이미 존재해서 실행 안했다 쀼쀼");
                     isAlreadyChecked = true;
                     break; // 이미 체크한 구절이므로 루프 종료
                 }
@@ -67,7 +64,6 @@ public class CheckBibleService {
 
             // 만약 체크되지 않은 구절이 있다면 체크를 추가
             if (!isAlreadyChecked) {
-                System.out.println("존재 안 해서 실행");
                 checkBibleVo.setBible_id(bible_id);
                 checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
                 checkBibleVo.setList(checkBibleDTO.getList());
@@ -85,7 +81,6 @@ public class CheckBibleService {
 		CheckBibleVo checkBibleVo = new CheckBibleVo();
 		checkBibleVo.setUser_id(checkBibleDTO.getUser_id());
 		Map<String, Object> map = checkBibleMapper.getLastReading(checkBibleVo); 
-		System.out.println("서비스 반환값" + map);
 		return map;
 	}
     

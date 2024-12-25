@@ -28,12 +28,9 @@ public class CheckBibleController {
 	
 	@PostMapping("/getLastReading")
 	public ResponseEntity<Map<String,Object>> getLastReading(@RequestBody CheckBibleDTO checkBibleDTO){
-		System.out.println(checkBibleDTO);
 		Map<String, Object> map = checkBibleService.getLastReading(checkBibleDTO);
-		System.out.println("반환값" + map);
 		if(map == null) {
 			map = new HashMap<>();
-		
 			map.put("list", "창세기");
 			map.put("chapter", 1);
 			map.put("verse", 1);

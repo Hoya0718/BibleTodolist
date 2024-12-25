@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bible.todo.domain.feedback.mapper.FeedbackMapper">
 	<select id="getSuggestionList" parameterType="com.bible.todo.domain.feedback.mapper.FeedbackMapper">
-		select id, user_id, title, feedback_date, suggest from feedback;
+		select id, user_id, title, feedback_date, suggest from feedback order by feedback_date desc;
 	</select>
 	
 	<insert id="postSuggest" parameterType="com.bible.todo.domain.feedback.mapper.FeedbackMapper">

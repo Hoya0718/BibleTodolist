@@ -23,7 +23,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String userId = (String) oAuth2User.getAttributes().get("email");  // 예시로 'sub' 속성을 사용
         
         // 로그인 후, URL에 사용자 정보를 포함하여 리디렉션
-        String redirectUrl = "http://localhost:3000/OAuth2Callback?userId=" + userId;
+        String redirectUrl = "http://btl.nayo.kr/OAuth2Callback?userId=" + userId;
         response.sendRedirect(redirectUrl);
     }
 }

@@ -40,7 +40,6 @@ public class BibleController {
 
 	@PostMapping("/getBibleTestament")
 	public ResponseEntity<List<String>> getBibleTestament(@RequestBody BibleDTO bibleDTO) {
-		System.out.println("실행했다" +  bibleDTO);
 		List<String> list = new ArrayList<>();
 		list = bibleService.getTestamentList(bibleDTO.getTestament());
 		return ResponseEntity.ok(list);
@@ -71,7 +70,6 @@ public class BibleController {
 
 	@PostMapping("/getSelectedContent")
 	public ResponseEntity<Map<String, Object>> getSelectedContent(@RequestBody BibleDTO bibleDTO) {
-		
 		// getSelectedContent가 null이나 빈 리스트를 반환할 수 있는지 체크
 		Map<String, Object> result = bibleService.getSelectedContent(bibleDTO);
 		// 리스트가 비어있거나 null일 경우 처리
@@ -86,7 +84,6 @@ public class BibleController {
 
 		result.put("maxChapter", maxChapter);
 		// 최종 결과 출력
-		System.out.println("컨텐츠 여기" + result);
 		
 		// 결과 반환
 		return ResponseEntity.ok(result);
@@ -107,7 +104,6 @@ public class BibleController {
 
 	@PostMapping("/nextList")
 	public ResponseEntity<Map<String, Object>> nextList(@RequestBody BibleDTO bibleDTO) {
-		System.out.println("다음 목차");
 		Map<String, Object> map = bibleService.nextList(bibleDTO.getList());
 		return ResponseEntity.ok(map);
 	}
@@ -121,7 +117,6 @@ public class BibleController {
 	@PostMapping("/SearchWord")
 	public ResponseEntity<List<Map<String, Object>>> SearchWord(@RequestBody BibleDTO bibleDTO) {
 		List<Map<String, Object>> list = bibleService.SearchWord(bibleDTO);
-		System.out.println("실행" + list);
 		return ResponseEntity.ok(list);
 	}
 	
@@ -139,7 +134,6 @@ public class BibleController {
 	@GetMapping("/todayBible")
 	public ResponseEntity<Map<String, Object>> todayBible() {
 		Map<String, Object> map = bibleService.todayBible();
-		System.out.println(map);
 		return ResponseEntity.ok(map);
 	}
 }

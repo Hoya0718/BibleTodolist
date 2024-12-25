@@ -102,8 +102,6 @@ public class BibleService {
 		BibleVo bibleVo = new BibleVo();
 		bibleVo.setContent(bibleDTO.getContent());
 		List<Map<String, Object>> list = bibleMapper.SearchWord(bibleVo);
-		System.out.println("서비스 전달값" + bibleVo.getContent());
-		System.out.println("서비스 반환값" + list);
 		return list;
 	}
 	
@@ -116,10 +114,8 @@ public class BibleService {
 		
 		// 좋아요가 없다면 새로 좋아요 추가
         if (list.isEmpty()) {
-            System.out.println("좋아요 추가");
             bibleMapper.likeBible(bibleLikeVo); // 좋아요 추가
             bibleLikeVo.setBible_id(bibleLikeDTO.getBible_id());
-            System.out.println(bibleLikeVo.getBible_id()+"추가1");
             bibleMapper.updateLike(bibleLikeVo); // 좋아요 수 업데이트
         } else {
             // 이미 좋아요를 눌렀다면 좋아요 취소
@@ -128,15 +124,11 @@ public class BibleService {
                                    entry.get("bible_id").equals(bibleLikeDTO.getBible_id()));
 
             if (isLiked) {
-                System.out.println("좋아요 취소");
                 bibleMapper.likeInit(bibleLikeVo);  // 좋아요 초기화
                 bibleMapper.updateLike(bibleLikeVo); // 좋아요 수 업데이트
-                System.out.println(bibleLikeVo.getBible_id()+"제거");
             } else {
                 // 좋아요를 처음 누른 경우
-                System.out.println("좋아요 추가");
                 bibleLikeVo.setBible_id(bibleLikeDTO.getBible_id());
-                System.out.println(bibleLikeVo.getBible_id()+"추가");
                 bibleMapper.likeBible(bibleLikeVo);   // 좋아요 추가
                 bibleMapper.updateLike(bibleLikeVo); // 좋아요 수 업데이트
             }
