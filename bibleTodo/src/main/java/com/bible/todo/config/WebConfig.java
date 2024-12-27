@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
     	registry.addViewController("/").setViewName("forward:/index.html");
     	registry.addViewController("/basic").setViewName("forward:/index.html");
     	registry.addViewController("/OAuth2Callback").setViewName("forward:/index.html");
-
+    	registry.addViewController("/error").setViewName("forward:/index.html");
         // 정적 파일은 Spring Boot가 자동으로 서빙함
         // /js, /css 등 추가 포워딩은 불필요
         // Spring Boot가 자동으로 서빙하므로 해당 라인 삭제

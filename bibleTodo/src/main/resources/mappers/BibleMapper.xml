@@ -93,7 +93,7 @@
 		resultType="Map">
 		SELECT list, chapter, verse, content
 		FROM bible
-		WHERE content like CONCAT(#{content},'%');
+		WHERE content like CONCAT('%', #{content},'%');
 	</select>
 	
 	<insert id="likeBible" parameterType="com.bible.todo.domain.bible.vo.BibleLikeVo">
