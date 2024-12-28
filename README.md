@@ -13,3 +13,11 @@
 <h1>ERD</h1>
 
 ![image](https://github.com/user-attachments/assets/46cd6c30-78e5-422d-b8e9-24458660636e)
+
+아래의 링크를 통해 체험할 수 있습니다.
+### btl.nayo.kr
+
+---향후 개발 사항---
+유저별 읽기 공유
+클린 코드 개선
+디자인
